@@ -3,6 +3,7 @@ import { Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/contexts/CartContext";
 import { CartButton } from "@/components/cart/CartButton";
+import { AgeGate } from "@/components/AgeGate";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -37,6 +38,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <CartProvider>
           {children}
+          <AgeGate />
           {/*
             Temporary host for the cart trigger until the Navbar (Phase 1)
             exists. When the Navbar is built, render <CartButton /> inside it

@@ -31,52 +31,50 @@ export function ShopSidebar({
   };
 
   return (
-    <aside className="lg:sticky lg:top-24 lg:h-fit">
-      <div className="rounded-2xl border border-brand-border bg-white p-5">
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-brand-navy">
-          Category
-        </h2>
+    <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
+      <div>
+        <h2 className="text-eyebrow mb-3">Category</h2>
 
-        <div className="mt-4 flex flex-col gap-3">
+        <div className="space-y-2.5">
           {CATEGORIES.map((c) => {
             const checked = draft.includes(c.slug);
             return (
               <label
                 key={c.slug}
-                className="group flex cursor-pointer items-start gap-3 text-sm text-brand-navy"
+                className="flex cursor-pointer items-start gap-2.5 text-sm"
               >
                 <Checkbox
                   checked={checked}
                   onCheckedChange={(value) => toggle(c.slug, Boolean(value))}
-                  className="mt-0.5"
+                  className="mt-0.5 border-primary shadow"
                 />
-                <span className="leading-snug group-hover:text-brand-blue">
+                <span className="leading-tight text-muted-foreground">
                   {c.name}
                 </span>
               </label>
             );
           })}
         </div>
+      </div>
 
-        <div className="mt-6 flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => {
-              setDraft([]);
-              onClear();
-            }}
-            className="flex-1 rounded-lg border border-brand-border px-3 py-2 text-sm font-medium text-brand-navy transition-colors hover:bg-brand-light"
-          >
-            Clear all
-          </button>
-          <button
-            type="button"
-            onClick={() => onApply(draft)}
-            className="flex-1 rounded-lg bg-brand-navy px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-blue"
-          >
-            Apply
-          </button>
-        </div>
+      <div className="flex gap-2">
+        <button
+          type="button"
+          onClick={() => {
+            setDraft([]);
+            onClear();
+          }}
+          className="inline-flex h-8 flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-background px-3 text-xs font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+        >
+          Clear all
+        </button>
+        <button
+          type="button"
+          onClick={() => onApply(draft)}
+          className="inline-flex h-8 flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-md bg-primary px-3 text-xs font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+        >
+          Apply
+        </button>
       </div>
     </aside>
   );

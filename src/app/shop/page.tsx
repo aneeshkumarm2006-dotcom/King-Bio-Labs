@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function ShopPage() {
   return (
-    <main className="flex-1 bg-brand-light">
+    <main className="flex-1">
       <ShopCatalog />
     </main>
   );

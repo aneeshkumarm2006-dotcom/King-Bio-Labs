@@ -25,28 +25,28 @@ export function ShopGrid({ search, selectedCategories }: ShopGridProps) {
 
   if (groups.length === 0) {
     return (
-      <p className="rounded-2xl border border-brand-border bg-white p-12 text-center text-muted-foreground">
+      <div className="rounded-lg border bg-surface p-12 text-center text-sm text-muted-foreground">
         No compounds match your filters.
-      </p>
+      </div>
     );
   }
 
   return (
-    <div className="flex flex-col gap-12">
+    <div className="space-y-14">
       {groups.map((c) => (
         <section key={c.slug} id={c.slug} className="scroll-mt-24">
-          <div className="mb-6 flex flex-col gap-1 border-b border-brand-border pb-4">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-blue">
-              {c.id} · {c.name}
-            </span>
-            <div className="flex items-baseline justify-between gap-4">
-              <h2 className="text-2xl font-bold tracking-tight text-brand-navy">
+          <div className="mb-5 flex items-end justify-between gap-4 border-b pb-3">
+            <div>
+              <p className="text-eyebrow mb-1 text-primary/70">
+                {c.id} · CATEGORY
+              </p>
+              <h2 className="font-display text-xl font-bold sm:text-2xl">
                 {c.name}
               </h2>
-              <span className="shrink-0 text-sm text-muted-foreground">
-                {c.products.length} compounds
-              </span>
             </div>
+            <p className="hidden text-xs text-muted-foreground sm:block">
+              {c.products.length} compounds
+            </p>
           </div>
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">

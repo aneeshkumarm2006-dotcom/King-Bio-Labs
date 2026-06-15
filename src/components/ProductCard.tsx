@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Star } from "lucide-react";
 
-import { StarRating } from "@/components/StarRating";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/lib/data/products";
 
@@ -23,65 +23,74 @@ export function ProductCard({ product, className }: ProductCardProps) {
     image,
   } = product;
 
-  const points = Math.round(price);
+  const points = Math.floor(price);
 
   return (
     <div
       className={cn(
-        "group relative flex flex-col overflow-hidden rounded-2xl border border-brand-border bg-white transition-shadow hover:shadow-lg",
+        "group relative flex flex-col overflow-hidden rounded-lg border bg-surface transition-colors hover:border-primary/40",
         className
       )}
     >
-      {bestSelling && (
-        <span className="absolute left-3 top-3 z-10 rounded-full bg-brand-blue px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
-          Best Selling
-        </span>
-      )}
-
       <Link
         href={`/product/${slug}`}
-        className="relative block aspect-square overflow-hidden bg-brand-light"
+        className="relative block aspect-square overflow-hidden bg-background"
       >
         <Image
           src={image ?? "/vial-product.svg"}
-          alt={name}
+          alt={`Research vial of ${name}`}
           fill
           sizes="(max-width: 768px) 50vw, 320px"
-          className="object-contain p-6 transition-transform duration-300 group-hover:scale-105"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
+        {bestSelling && (
+          <div className="absolute right-3 top-3 flex flex-col items-end gap-1.5">
+            <div className="inline-flex items-center rounded-md border border-primary/60 bg-background/80 px-2.5 py-0.5 text-xs font-semibold text-primary backdrop-blur">
+              Best Selling
+            </div>
+          </div>
+        )}
       </Link>
 
-      <div className="flex flex-1 flex-col gap-2 p-4">
-        <span className="text-[11px] font-semibold uppercase tracking-wider text-brand-navy/70">
-          {category}
-        </span>
+      <div className="flex flex-1 flex-col gap-2 p-3">
+        <div className="text-eyebrow truncate">{category}</div>
 
         <Link
           href={`/product/${slug}`}
-          className="text-sm font-semibold leading-snug text-brand-navy hover:text-brand-blue"
+          className="font-display text-base font-semibold leading-tight hover:text-primary"
         >
           {name}
         </Link>
 
-        <StarRating rating={rating} count={reviewCount} size={14} />
-
-        <div className="mt-auto flex items-end justify-between pt-2">
-          <div>
-            <p className="text-lg font-bold text-brand-navy">
-              ${price.toFixed(2)}
-            </p>
-            <p className="text-[11px] text-muted-foreground">
-              Earn {points} points
-            </p>
+        <div className="flex items-center gap-1.5">
+          <div className="flex">
+            {Array.from({ length: 5 }, (_, i) => (
+              <Star
+                key={i}
+                className="h-3 w-3 fill-primary text-primary"
+                aria-hidden="true"
+              />
+            ))}
           </div>
+          <span className="text-xs text-muted-foreground">
+            {rating.toFixed(1)} · {reviewCount} reviews
+          </span>
         </div>
 
-        <Link
-          href={`/product/${slug}`}
-          className="mt-2 inline-flex h-9 items-center justify-center rounded-lg bg-brand-navy px-4 text-sm font-medium text-white transition-colors hover:bg-brand-blue"
-        >
-          {hasVariants ? "Select Options" : "View Product"}
-        </Link>
+        <div className="flex items-baseline gap-2">
+          <span className="text-lg font-bold">${price.toFixed(2)}</span>
+        </div>
+
+        <p className="text-xs text-muted-foreground">Earn {points} points</p>
+
+        <div className="mt-auto pt-1">
+          <Link
+            href={`/product/${slug}`}
+            className="inline-flex h-9 w-full items-center justify-center gap-2 whitespace-nowrap rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+          >
+            {hasVariants ? "Select Options" : "View Product"}
+          </Link>
+        </div>
       </div>
     </div>
   );

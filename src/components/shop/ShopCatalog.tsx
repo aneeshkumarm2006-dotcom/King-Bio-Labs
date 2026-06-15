@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { Search } from "lucide-react";
 
-import { SectionLabel } from "@/components/SectionLabel";
 import { ShopSidebar } from "@/components/shop/ShopSidebar";
 import { ShopGrid } from "@/components/shop/ShopGrid";
 
@@ -12,33 +11,33 @@ export function ShopCatalog() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   return (
-    <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
+    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
       {/* Page header */}
-      <div className="flex flex-col gap-3">
-        <SectionLabel>Catalog</SectionLabel>
-        <h1 className="text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
+      <div className="mb-8">
+        <p className="text-eyebrow mb-2">CATALOG</p>
+        <h1 className="font-display text-3xl font-bold sm:text-4xl">
           Shop All Compounds
         </h1>
-        <p className="max-w-2xl text-muted-foreground">
-          The complete King Bio Labs catalog — every compound third-party tested
-          with a lot-specific COA. Search by name or filter by category.
+        <p className="mt-3 max-w-2xl text-muted-foreground">
+          Organized by research category. Every compound is 99%+ purity with a
+          COA on every batch.
         </p>
       </div>
 
       {/* Full-width search */}
-      <div className="relative mt-8">
-        <Search className="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-muted-foreground" />
+      <div className="relative mb-8">
+        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <input
-          type="search"
+          type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search compounds…"
-          className="h-13 w-full rounded-xl border border-brand-border bg-white py-3.5 pl-12 pr-4 text-base text-brand-navy outline-none focus:border-brand-blue"
+          placeholder="Search compounds by name, category, or description…"
+          className="flex h-9 w-full rounded-md border border-input bg-transparent py-1 pl-10 pr-3 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm"
         />
       </div>
 
       {/* Two-column layout */}
-      <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-[260px_1fr]">
+      <div className="grid gap-8 lg:grid-cols-[240px_1fr]">
         <ShopSidebar
           selectedCategories={selectedCategories}
           onApply={setSelectedCategories}

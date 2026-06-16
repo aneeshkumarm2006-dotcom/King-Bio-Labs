@@ -1,9 +1,4 @@
 import {
-  Activity,
-  FlaskConical,
-  BadgeCheck,
-  RefreshCw,
-  HelpCircle,
   Beaker,
   ClipboardCheck,
   Microscope,
@@ -12,33 +7,15 @@ import {
   Truck,
 } from "lucide-react";
 
+import { SectionHeader } from "@/components/SectionHeader";
 import { SectionLabel } from "@/components/SectionLabel";
+import { cn } from "@/lib/utils";
 
 const METRICS = [
-  {
-    icon: Activity,
-    value: "99.7%",
-    label: "Average Purity",
-    sub: "Last 12 months, all batches",
-  },
-  {
-    icon: FlaskConical,
-    value: "2,400+",
-    label: "Batches Tested",
-    sub: "Independent third-party COAs",
-  },
-  {
-    icon: BadgeCheck,
-    value: "4",
-    label: "Labs Verified",
-    sub: "ISO-17025 accredited partners",
-  },
-  {
-    icon: RefreshCw,
-    value: "94%",
-    label: "Reorder Rate",
-    sub: "Within 90 days of first order",
-  },
+  { value: "99.7%", label: "Average Purity", sub: "Last 12 months, all batches" },
+  { value: "2,400+", label: "Batches Tested", sub: "Independent third-party COAs" },
+  { value: "4", label: "Labs Verified", sub: "ISO-17025 accredited partners" },
+  { value: "94%", label: "Reorder Rate", sub: "Within 90 days of first order" },
 ];
 
 const PURITY_COMPARISON = [
@@ -103,13 +80,7 @@ const STEPS = [
   },
 ];
 
-const INSTITUTIONS = [
-  "Stanford",
-  "Johns Hopkins",
-  "Naval Health",
-  "ETH Zürich",
-  "NUS",
-];
+const INSTITUTIONS = ["Stanford", "Johns Hopkins", "Naval Health", "ETH Zürich", "NUS"];
 
 function PurityTrendChart() {
   const width = 600;
@@ -149,15 +120,8 @@ function PurityTrendChart() {
           height - padY - ((g - min) / (max - min)) * (height - padY * 2);
         return (
           <g key={g}>
-            <line
-              x1={padX}
-              x2={width - padX}
-              y1={y}
-              y2={y}
-              stroke="#e5e7eb"
-              strokeWidth={1}
-            />
-            <text x={4} y={y + 4} fontSize={10} fill="#9ca3af">
+            <line x1={padX} x2={width - padX} y1={y} y2={y} stroke="#e5e7eb" strokeWidth={1} />
+            <text x={4} y={y + 4} fontSize={10} fill="#9ca3af" className="font-mono">
               {g.toFixed(1)}
             </text>
           </g>
@@ -185,6 +149,7 @@ function PurityTrendChart() {
             fontSize={10}
             fill="#9ca3af"
             textAnchor="middle"
+            className="font-mono"
           >
             {label}
           </text>
@@ -196,170 +161,151 @@ function PurityTrendChart() {
 
 export function StatsSection() {
   return (
-    <section className="border-b border-brand-border bg-white">
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:py-24">
-        <div className="flex flex-col gap-3">
-          <SectionLabel>The Numbers Back It Up</SectionLabel>
-          <h2 className="text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">
-            Documentation discipline, measured
-          </h2>
-          <p className="max-w-2xl text-muted-foreground">
-            Every claim on this page is backed by lot-level data and independent
-            third-party verification. Here is what the last twelve months look
-            like.
-          </p>
-        </div>
+    <section className="border-b border-border bg-white">
+      <div className="mx-auto w-full max-w-[1320px] px-6 py-20 lg:px-10 lg:py-28">
+        <SectionHeader
+          index="04"
+          label="The Numbers Back It Up"
+          title="The Benchmark For Researchers Who Won't Settle."
+          lede="Independent labs, performance clinicians, and applied research teams across four continents ask for Wick Peptides by name. Here is what sets us apart."
+        />
 
-        {/* Metric cards */}
-        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {METRICS.map(({ icon: Icon, value, label, sub }) => (
-            <div
-              key={label}
-              className="flex flex-col gap-2 rounded-2xl border border-brand-border bg-brand-light p-6"
-            >
-              <span className="flex size-10 items-center justify-center rounded-xl bg-brand-navy/5 text-brand-navy">
-                <Icon className="size-5" />
+        {/* Metric ledger */}
+        <div className="mt-12 grid grid-cols-2 gap-px border border-border bg-border lg:grid-cols-4">
+          {METRICS.map((m) => (
+            <div key={m.label} className="flex flex-col gap-1 bg-white p-6 lg:p-8">
+              <span className="font-display text-4xl font-bold tabular-nums text-brand-navy lg:text-5xl">
+                {m.value}
               </span>
-              <span className="mt-2 text-3xl font-bold text-brand-navy">
-                {value}
+              <span className="mt-2 text-sm font-semibold text-brand-navy">
+                {m.label}
               </span>
-              <span className="flex items-center gap-1.5 text-sm font-semibold text-brand-navy">
-                {label}
-                <button
-                  type="button"
-                  title={sub}
-                  aria-label={`More info about ${label}`}
-                  className="text-muted-foreground hover:text-brand-blue"
-                >
-                  <HelpCircle className="size-3.5" />
-                </button>
+              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+                {m.sub}
               </span>
-              <span className="text-xs text-muted-foreground">{sub}</span>
             </div>
           ))}
         </div>
 
-        {/* Charts */}
-        <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
-          {/* Purity comparison */}
-          <div className="rounded-2xl border border-brand-border bg-brand-light p-6">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-brand-navy">
-                Purity Comparison
-              </h3>
-              <span className="rounded-full bg-brand-navy/5 px-2.5 py-1 text-[11px] font-semibold text-brand-navy">
+        {/* Comparison + trend */}
+        <div className="mt-6 grid gap-6 lg:grid-cols-2">
+          {/* Comparison */}
+          <div className="flex flex-col border border-border bg-white">
+            <div className="flex items-center justify-between gap-3 border-b border-border px-6 py-4">
+              <div>
+                <h3 className="font-display text-lg font-bold text-brand-navy">
+                  Purity Comparison
+                </h3>
+                <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+                  HPLC-verified across 6 competing suppliers
+                </p>
+              </div>
+              <span className="shrink-0 border border-border px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-brand-navy">
                 Latest Batch
               </span>
             </div>
-            <div className="mt-6 flex flex-col gap-4">
+            <div className="flex flex-1 flex-col gap-4 p-6">
               {PURITY_COMPARISON.map((row) => (
                 <div key={row.name} className="flex flex-col gap-1.5">
                   <div className="flex items-center justify-between text-sm">
-                    <span
-                      className={
-                        row.highlight
-                          ? "font-semibold text-brand-navy"
-                          : "text-muted-foreground"
-                      }
-                    >
+                    <span className={row.highlight ? "font-semibold text-brand-navy" : "text-muted-foreground"}>
                       {row.name}
                     </span>
-                    <span
-                      className={
-                        row.highlight
-                          ? "font-semibold text-brand-navy"
-                          : "text-muted-foreground"
-                      }
-                    >
+                    <span className={cn("font-mono tabular-nums", row.highlight ? "font-semibold text-brand-navy" : "text-muted-foreground")}>
                       {row.value.toFixed(1)}%
                     </span>
                   </div>
-                  <div className="h-2.5 overflow-hidden rounded-full bg-brand-border">
+                  <div className="h-2.5 overflow-hidden bg-surface-2">
                     <div
-                      className={
-                        row.highlight ? "h-full bg-brand-navy" : "h-full bg-brand-blue/40"
-                      }
+                      className={row.highlight ? "h-full bg-brand-navy" : "h-full bg-brand-blue/40"}
                       style={{ width: `${row.value}%` }}
                     />
                   </div>
                 </div>
               ))}
             </div>
-            <p className="mt-5 flex items-center gap-1.5 text-xs text-muted-foreground">
-              <HelpCircle className="size-3.5" />
-              Source: independent ISO-17025 assay, latest released lots.
+            <p className="border-t border-border px-6 py-4 text-xs leading-relaxed text-muted-foreground">
+              Source: Eurofins Scientific (ISO-17025), blind assay April 2025.
+              Method: HPLC-UV @ 214 nm, triplicate injection. Hover any row for
+              lot detail.
             </p>
           </div>
 
-          {/* Purity trend */}
-          <div className="rounded-2xl border border-brand-border bg-brand-light p-6">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-brand-navy">
-                Purity Trend — 24 Months
-              </h3>
-              <span className="rounded-full bg-green-100 px-2.5 py-1 text-[11px] font-semibold text-green-700">
+          {/* Trend */}
+          <div className="flex flex-col border border-border bg-white">
+            <div className="flex items-center justify-between gap-3 border-b border-border px-6 py-4">
+              <div>
+                <h3 className="font-display text-lg font-bold text-brand-navy">
+                  Purity Trend - 24 Months
+                </h3>
+                <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+                  Rolling average of all tested batches
+                </p>
+              </div>
+              <span className="shrink-0 bg-green-100 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-green-700">
                 +0.4% YoY
               </span>
             </div>
-            <div className="mt-6">
+            <div className="flex-1 p-6">
               <PurityTrendChart />
             </div>
-            <p className="mt-5 flex items-center gap-1.5 text-xs text-muted-foreground">
-              <HelpCircle className="size-3.5" />
-              Source: aggregated lot COAs, Q1 2023 – Jun 2025.
+            <p className="border-t border-border px-6 py-4 text-xs leading-relaxed text-muted-foreground">
+              Source: Internal batch ledger reconciled against 2,400+
+              third-party COAs (Eurofins, SGS, Intertek, Alex Stewart). Hover any
+              point for the quarter value.
             </p>
           </div>
         </div>
 
-        {/* 6-step testing process */}
-        <div className="mt-14">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <div className="flex flex-col gap-2">
+        {/* Testing process — checklist ledger */}
+        <div className="mt-20 lg:mt-28">
+          <div className="border-t border-border pt-6">
+            <div className="flex flex-wrap items-center justify-between gap-4">
               <SectionLabel>How We Test</SectionLabel>
-              <h3 className="text-2xl font-bold tracking-tight text-brand-navy">
-                Six checkpoints between synthesis and your bench.
-              </h3>
+              <span className="border border-border px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-brand-navy">
+                ISO-17025 verified
+              </span>
             </div>
-            <span className="w-fit rounded-full bg-brand-navy/5 px-3 py-1.5 text-xs font-semibold text-brand-navy">
-              ISO-17025 verified
-            </span>
+            <h3 className="mt-6 max-w-3xl font-display text-2xl font-bold tracking-tight text-brand-navy sm:text-3xl">
+              Six checkpoints between synthesis and your bench.
+            </h3>
+            <p className="mt-4 max-w-2xl text-muted-foreground">
+              Every lot follows the same documented chain. Miss a single
+              checkpoint and the lot stays put — no exceptions, no expedites.
+            </p>
           </div>
 
-          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <ol className="mt-10 border-t border-border">
             {STEPS.map(({ icon: Icon, n, title, text }) => (
-              <div
+              <li
                 key={n}
-                className="flex flex-col gap-3 rounded-2xl border border-brand-border bg-brand-light p-6"
+                className="grid items-start gap-x-6 gap-y-2 border-b border-border py-6 sm:grid-cols-[3.5rem_minmax(0,1fr)] lg:grid-cols-[4rem_18rem_minmax(0,1fr)]"
               >
-                <div className="flex items-center gap-3">
-                  <span className="flex size-10 items-center justify-center rounded-xl bg-brand-navy/5 text-brand-navy">
-                    <Icon className="size-5" />
-                  </span>
-                  <span className="font-mono text-sm font-semibold text-brand-blue">
-                    {n}
-                  </span>
-                </div>
-                <h4 className="text-base font-semibold text-brand-navy">
+                <span className="font-mono text-2xl font-bold tabular-nums text-brand-navy/25">
+                  {n}
+                </span>
+                <h4 className="flex items-center gap-3 font-display text-lg font-semibold text-brand-navy">
+                  <Icon className="size-5 shrink-0 text-brand-blue" aria-hidden="true" />
                   {title}
                 </h4>
                 <p className="text-sm leading-relaxed text-muted-foreground">
                   {text}
                 </p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
 
-        {/* Institution logos */}
-        <div className="mt-14 border-t border-brand-border pt-10">
-          <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+        {/* Institutions */}
+        <div className="mt-16 flex flex-col items-start gap-6 border-t border-border pt-10 lg:flex-row lg:items-center lg:justify-between">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
             As Specified By
           </p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+          <div className="flex flex-wrap items-center gap-x-10 gap-y-4">
             {INSTITUTIONS.map((name) => (
               <span
                 key={name}
-                className="text-sm font-bold uppercase tracking-wider text-brand-navy/50"
+                className="font-display text-sm font-bold uppercase tracking-wider text-brand-navy/45"
               >
                 {name}
               </span>

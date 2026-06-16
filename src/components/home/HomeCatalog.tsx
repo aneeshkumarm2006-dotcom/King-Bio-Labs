@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { ChevronDown, LayoutGrid, Rows3, Search, X } from "lucide-react";
 
+import { SectionHeader } from "@/components/SectionHeader";
 import { ProductCard } from "@/components/ProductCard";
 import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
@@ -86,54 +87,48 @@ export function HomeCatalog() {
   };
 
   const gridClass = cn(
-    "grid gap-5",
+    "grid gap-px border border-border bg-border",
     view === "expanded"
       ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-      : "grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"
+      : "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"
   );
 
+  const fieldLabel =
+    "mb-1.5 block font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground";
   const selectClass =
-    "flex h-9 w-full cursor-pointer appearance-none items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent py-2 pl-3 pr-9 text-sm shadow-sm transition-colors focus:outline-none focus:ring-1 focus:ring-ring";
+    "flex h-10 w-full cursor-pointer appearance-none items-center rounded-none border border-brand-border bg-white py-2 pl-3 pr-9 text-sm transition-colors focus:outline-none focus:ring-1 focus:ring-ring";
 
   return (
-    <section className="border-b">
-      <div className="mx-auto max-w-7xl px-5 py-12 sm:px-6 sm:py-14">
-        <div className="mb-8 max-w-2xl">
-          <p className="text-eyebrow mb-3">FULL CATALOG</p>
-          <h2 className="font-display text-3xl font-bold sm:text-4xl">
-            Precision-Selected For Purity, Consistency And Dependable Handling.
-          </h2>
-          <p className="mt-4 text-muted-foreground">
-            Browse our research compounds by category. Every batch is third-party
-            tested with a full COA.
-          </p>
-        </div>
+    <section className="border-b border-border bg-white">
+      <div className="mx-auto w-full max-w-[1320px] px-6 py-20 lg:px-10 lg:py-28">
+        <SectionHeader
+          index="02"
+          label="Full Catalog"
+          title="Precision-Selected For Purity, Consistency And Dependable Handling."
+          lede="Browse our research compounds by category. Every batch is third-party tested with a full COA."
+        />
 
-        {/* Filter bar */}
-        <div className="mb-6 rounded-lg border bg-surface/60 p-4">
+        {/* Filter toolbar */}
+        <div className="mt-12 border border-border bg-surface p-4 lg:p-5">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end">
             {/* Search */}
             <div className="flex-1">
-              <label className="text-eyebrow mb-1.5 block text-muted-foreground">
-                Search
-              </label>
+              <label className={fieldLabel}>Search</label>
               <div className="relative">
-                <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
                 <input
                   type="text"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search compounds…"
-                  className="flex h-9 w-full rounded-md border border-input bg-transparent py-1 pl-9 pr-3 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm"
+                  className="flex h-10 w-full rounded-none border border-brand-border bg-white py-1 pl-9 pr-3 text-base transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm"
                 />
               </div>
             </div>
 
             {/* Category */}
             <div className="lg:w-56">
-              <label className="text-eyebrow mb-1.5 block text-muted-foreground">
-                Category
-              </label>
+              <label className={fieldLabel}>Category</label>
               <div className="relative">
                 <select
                   value={category}
@@ -148,15 +143,13 @@ export function HomeCatalog() {
                     </option>
                   ))}
                 </select>
-                <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 opacity-50" />
+                <ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 opacity-50" />
               </div>
             </div>
 
             {/* Sort */}
             <div className="lg:w-44">
-              <label className="text-eyebrow mb-1.5 block text-muted-foreground">
-                Sort
-              </label>
+              <label className={fieldLabel}>Sort</label>
               <div className="relative">
                 <select
                   value={sort}
@@ -169,15 +162,15 @@ export function HomeCatalog() {
                   <option value="price-desc">Price: High to Low</option>
                   <option value="rating">Top Rated</option>
                 </select>
-                <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 opacity-50" />
+                <ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 opacity-50" />
               </div>
             </div>
 
             {/* Price */}
             <div className="lg:w-64">
-              <label className="text-eyebrow mb-1.5 flex items-center justify-between text-muted-foreground">
+              <label className="mb-1.5 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                 <span>Price</span>
-                <span className="text-foreground/80 tabular-nums">
+                <span className="text-brand-navy tabular-nums">
                   ${price[0].toFixed(2)} - ${price[1].toFixed(2)}
                 </span>
               </label>
@@ -198,22 +191,20 @@ export function HomeCatalog() {
 
             {/* View */}
             <div>
-              <label className="text-eyebrow mb-1.5 block text-muted-foreground">
-                View
-              </label>
-              <div className="inline-flex rounded-md border bg-background p-0.5">
+              <label className={fieldLabel}>View</label>
+              <div className="inline-flex rounded-none border border-brand-border bg-white p-0.5">
                 <button
                   type="button"
                   onClick={() => setView("expanded")}
                   aria-pressed={view === "expanded"}
                   className={cn(
-                    "flex h-8 items-center gap-1.5 rounded px-3 text-xs font-medium transition-colors",
+                    "flex h-8 items-center gap-1.5 rounded-none px-3 text-xs font-medium transition-colors",
                     view === "expanded"
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground"
+                      ? "bg-brand-navy text-white"
+                      : "text-muted-foreground hover:text-brand-navy"
                   )}
                 >
-                  <LayoutGrid className="h-3.5 w-3.5" />
+                  <LayoutGrid className="size-3.5" />
                   Expanded
                 </button>
                 <button
@@ -221,13 +212,13 @@ export function HomeCatalog() {
                   onClick={() => setView("compact")}
                   aria-pressed={view === "compact"}
                   className={cn(
-                    "flex h-8 items-center gap-1.5 rounded px-3 text-xs font-medium transition-colors",
+                    "flex h-8 items-center gap-1.5 rounded-none px-3 text-xs font-medium transition-colors",
                     view === "compact"
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground"
+                      ? "bg-brand-navy text-white"
+                      : "text-muted-foreground hover:text-brand-navy"
                   )}
                 >
-                  <Rows3 className="h-3.5 w-3.5" />
+                  <Rows3 className="size-3.5" />
                   Compact
                 </button>
               </div>
@@ -238,43 +229,40 @@ export function HomeCatalog() {
         {/* When filtering, show every match in one flat grid; otherwise the
             category accordion. */}
         {hasActiveFilters ? (
-          <div className="space-y-4">
+          <div className="mt-6 space-y-4">
             <div className="flex items-center justify-between">
-              <p className="text-sm text-muted-foreground">
+              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
                 {flatProducts.length}{" "}
                 {flatProducts.length === 1 ? "result" : "results"}
               </p>
               <button
                 type="button"
                 onClick={clearFilters}
-                className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-brand-navy"
               >
-                <X className="h-4 w-4" />
+                <X className="size-4" />
                 Clear filters
               </button>
             </div>
 
             {flatProducts.length === 0 ? (
-              <p className="rounded-lg border bg-surface/40 p-10 text-center text-sm text-muted-foreground">
+              <p className="border border-border bg-surface p-10 text-center text-sm text-muted-foreground">
                 No compounds match your filters.
               </p>
             ) : (
               <div className={gridClass}>
                 {flatProducts.map((p) => (
-                  <ProductCard key={p.slug} product={p} />
+                  <ProductCard key={p.slug} product={p} className="border-0" />
                 ))}
               </div>
             )}
           </div>
         ) : (
-          <div className="space-y-3">
+          <div className="mt-6 space-y-3">
             {categorySections.map((c) => {
               const isOpen = open === c.slug;
               return (
-                <div
-                  key={c.slug}
-                  className="overflow-hidden rounded-lg border bg-surface/40"
-                >
+                <div key={c.slug} className="border border-border bg-white">
                   <button
                     type="button"
                     onClick={() => setOpen(isOpen ? null : c.slug)}
@@ -282,18 +270,20 @@ export function HomeCatalog() {
                     className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-surface"
                   >
                     <div className="flex items-center gap-4">
-                      <span className="text-eyebrow text-primary/70">{c.id}</span>
-                      <h3 className="font-display text-lg font-bold sm:text-xl">
+                      <span className="font-mono text-xs font-semibold tracking-[0.16em] text-brand-blue">
+                        {c.id}
+                      </span>
+                      <h3 className="font-display text-lg font-bold text-brand-navy sm:text-xl">
                         {c.name}
                       </h3>
                     </div>
                     <div className="flex items-center gap-4">
-                      <span className="text-xs text-muted-foreground">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
                         {c.products.length} compounds
                       </span>
                       <ChevronDown
                         className={cn(
-                          "h-4 w-4 text-muted-foreground transition-transform",
+                          "size-4 text-muted-foreground transition-transform",
                           isOpen && "rotate-180"
                         )}
                       />
@@ -301,7 +291,7 @@ export function HomeCatalog() {
                   </button>
 
                   {isOpen && (
-                    <div className="border-t p-5">
+                    <div className="border-t border-border p-5">
                       {c.products.length === 0 ? (
                         <p className="text-center text-sm text-muted-foreground">
                           No compounds in this category yet.
@@ -309,7 +299,11 @@ export function HomeCatalog() {
                       ) : (
                         <div className={gridClass}>
                           {c.products.map((p) => (
-                            <ProductCard key={p.slug} product={p} />
+                            <ProductCard
+                              key={p.slug}
+                              product={p}
+                              className="border-0"
+                            />
                           ))}
                         </div>
                       )}

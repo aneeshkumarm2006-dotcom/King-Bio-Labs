@@ -1,48 +1,48 @@
 import { Mail, Clock } from "lucide-react";
 
+import { SectionHeader } from "@/components/SectionHeader";
+
 export function ContactHelp() {
   return (
-    <section className="bg-brand-light">
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:py-24">
-        <div className="flex flex-col items-center gap-3 text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">
-            Need Help With Your Research?
-          </h2>
-          <p className="max-w-xl text-muted-foreground">
-            Our team is here for product questions, orders and guidance.
-          </p>
-        </div>
+    <section className="bg-white">
+      <div className="mx-auto w-full max-w-[1320px] px-6 py-20 lg:px-10 lg:py-28">
+        <SectionHeader
+          index="06"
+          label="Support"
+          title="Questions About Your Research?"
+          lede="Our team is on hand for product questions, order help, and guidance."
+        />
 
-        <div className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-2">
-          {/* Email card */}
+        <div className="mt-12 grid gap-px border border-border bg-border sm:grid-cols-2">
           <a
             href="mailto:support@wickpeptides.com"
-            className="flex flex-col gap-3 rounded-2xl border border-brand-border bg-white p-6 transition-shadow hover:shadow-md"
+            className="group flex flex-col gap-3 bg-white p-8 transition-colors hover:bg-brand-light"
           >
-            <span className="flex size-11 items-center justify-center rounded-xl bg-brand-navy/5 text-brand-navy">
-              <Mail className="size-5" />
-            </span>
-            <h3 className="text-base font-semibold text-brand-navy">Email Us</h3>
-            <span className="text-sm font-medium text-brand-blue">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-blue">
+                Email Us
+              </span>
+              <Mail className="size-5 text-brand-navy" aria-hidden="true" />
+            </div>
+            <span className="font-display text-xl font-semibold text-brand-navy transition-colors group-hover:text-brand-blue">
               support@wickpeptides.com
             </span>
           </a>
 
-          {/* Response card */}
-          <div className="flex flex-col gap-3 rounded-2xl border border-brand-border bg-white p-6">
-            <span className="flex size-11 items-center justify-center rounded-xl bg-brand-navy/5 text-brand-navy">
-              <Clock className="size-5" />
-            </span>
-            <h3 className="text-base font-semibold text-brand-navy">
-              Response Within 24 Hours
-            </h3>
-            <ul className="flex flex-col gap-1.5 text-sm text-muted-foreground">
-              <li className="flex items-center gap-2">
-                <span className="size-1.5 rounded-full bg-brand-blue" />
+          <div className="flex flex-col gap-3 bg-white p-8">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-blue">
+                Response Within 24 Hours
+              </span>
+              <Clock className="size-5 text-brand-navy" aria-hidden="true" />
+            </div>
+            <ul className="flex flex-col gap-2 text-sm text-muted-foreground">
+              <li className="flex items-center gap-2.5">
+                <span aria-hidden="true" className="size-1.5 bg-brand-blue" />
                 Real-time community support
               </li>
-              <li className="flex items-center gap-2">
-                <span className="size-1.5 rounded-full bg-brand-blue" />
+              <li className="flex items-center gap-2.5">
+                <span aria-hidden="true" className="size-1.5 bg-brand-blue" />
                 Guidance on products and orders
               </li>
             </ul>

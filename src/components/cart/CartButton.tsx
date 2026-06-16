@@ -18,7 +18,7 @@ export function CartButton({ className }: { className?: string }) {
       onClick={openCart}
       aria-label={`Open cart${itemCount > 0 ? `, ${itemCount} items` : ""}`}
       className={cn(
-        "relative flex size-10 items-center justify-center rounded-lg text-brand-navy transition-colors hover:bg-brand-light",
+        "relative flex size-10 items-center justify-center rounded-none border border-transparent text-brand-navy transition-colors hover:border-brand-navy hover:bg-brand-light",
         className
       )}
     >

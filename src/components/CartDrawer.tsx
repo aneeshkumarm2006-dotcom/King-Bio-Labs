@@ -26,29 +26,35 @@ export function CartDrawer() {
         className="w-full sm:max-w-md"
         aria-describedby={undefined}
       >
-        <SheetHeader>
-          <SheetTitle className="flex items-center gap-2 text-brand-navy">
-            <ShoppingBag className="size-5" aria-hidden="true" />
-            Your Cart
+        <SheetHeader className="gap-0 border-border p-0">
+          <div className="flex items-center gap-2.5 border-b border-border px-5 py-3 font-mono text-[11px] uppercase tracking-[0.22em] text-brand-blue">
+            <span aria-hidden="true" className="size-1.5 shrink-0 bg-brand-navy" />
+            Wick Peptides / Cart
+          </div>
+          <div className="flex items-center justify-between gap-2 px-5 py-4">
+            <SheetTitle className="flex items-center gap-2.5 font-display text-xl font-bold text-brand-navy">
+              <ShoppingBag className="size-5 text-brand-blue" aria-hidden="true" />
+              Your Cart
+            </SheetTitle>
             {itemCount > 0 && (
-              <span className="text-sm font-normal text-muted-foreground">
-                ({itemCount} {itemCount === 1 ? "item" : "items"})
+              <span className="border border-border px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                {itemCount} {itemCount === 1 ? "item" : "items"}
               </span>
             )}
-          </SheetTitle>
+          </div>
         </SheetHeader>
 
         {items.length === 0 ? (
-          <div className="flex flex-1 flex-col items-center justify-center gap-4 px-6 text-center">
-            <div className="flex size-16 items-center justify-center rounded-full bg-brand-light">
+          <div className="flex flex-1 flex-col items-center justify-center gap-5 border-t border-border px-6 text-center">
+            <div className="flex size-16 items-center justify-center border border-border bg-surface-2">
               <ShoppingBag
                 className="size-7 text-brand-navy/60"
                 aria-hidden="true"
               />
             </div>
             <div>
-              <p className="font-semibold text-brand-navy">Nothing in your cart yet</p>
-              <p className="mt-1 text-sm text-muted-foreground">
+              <p className="font-display text-lg font-bold text-brand-navy">Nothing in your cart yet</p>
+              <p className="mt-1.5 text-sm text-muted-foreground">
                 Add a few research compounds to begin.
               </p>
             </div>
@@ -57,7 +63,7 @@ export function CartDrawer() {
               render={
                 <Link
                   href="/shop"
-                  className="inline-flex h-11 items-center justify-center rounded-xl bg-brand-navy px-5 text-sm font-semibold text-white transition-colors hover:bg-brand-blue"
+                  className="inline-flex h-12 items-center justify-center gap-2 rounded-none bg-brand-navy px-7 text-[13px] font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-brand-blue"
                 />
               }
             >
@@ -67,13 +73,13 @@ export function CartDrawer() {
         ) : (
           <>
             {/* Scrollable item list */}
-            <ul className="flex-1 divide-y divide-brand-border overflow-y-auto px-5">
+            <ul className="flex-1 overflow-y-auto border-t border-border">
               {items.map((item) => (
-                <li key={item.id} className="flex gap-3 py-4">
+                <li key={item.id} className="flex gap-4 border-b border-border px-5 py-5">
                   <Link
                     href={`/product/${item.slug}`}
                     onClick={() => setOpen(false)}
-                    className="relative size-20 shrink-0 overflow-hidden rounded-lg border border-brand-border bg-brand-light"
+                    className="relative size-20 shrink-0 overflow-hidden border border-border bg-surface-2"
                   >
                     <Image
                       src={item.image}
@@ -90,12 +96,12 @@ export function CartDrawer() {
                         <Link
                           href={`/product/${item.slug}`}
                           onClick={() => setOpen(false)}
-                          className="line-clamp-2 text-sm font-semibold text-brand-navy hover:text-brand-blue"
+                          className="line-clamp-2 font-display text-sm font-semibold leading-snug text-brand-navy transition-colors hover:text-brand-blue"
                         >
                           {item.name}
                         </Link>
                         {item.dosageLabel && (
-                          <p className="mt-0.5 text-xs text-muted-foreground">
+                          <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
                             {item.dosageLabel}
                           </p>
                         )}
@@ -104,26 +110,26 @@ export function CartDrawer() {
                         type="button"
                         onClick={() => removeItem(item.id)}
                         aria-label={`Remove ${item.name} from cart`}
-                        className="-mr-1 -mt-1 flex size-8 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
+                        className="-mr-1 -mt-1 flex size-8 shrink-0 items-center justify-center rounded-none text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
                       >
                         <Trash2 className="size-4" />
                       </button>
                     </div>
 
-                    <div className="mt-auto flex items-center justify-between pt-2">
+                    <div className="mt-auto flex items-center justify-between pt-3">
                       {/* Quantity stepper */}
-                      <div className="inline-flex items-center rounded-lg border border-brand-border">
+                      <div className="inline-flex items-center border border-border">
                         <button
                           type="button"
                           onClick={() =>
                             setQuantity(item.id, item.quantity - 1)
                           }
                           aria-label="Decrease quantity"
-                          className="flex size-8 items-center justify-center text-brand-navy transition-colors hover:bg-brand-light"
+                          className="flex size-8 items-center justify-center rounded-none text-brand-navy transition-colors hover:bg-brand-navy hover:text-white"
                         >
                           <Minus className="size-3.5" />
                         </button>
-                        <span className="w-9 text-center text-sm font-semibold text-brand-navy tabular-nums">
+                        <span className="w-9 border-x border-border text-center font-mono text-sm font-semibold tabular-nums text-brand-navy">
                           {item.quantity}
                         </span>
                         <button
@@ -132,13 +138,13 @@ export function CartDrawer() {
                             setQuantity(item.id, item.quantity + 1)
                           }
                           aria-label="Increase quantity"
-                          className="flex size-8 items-center justify-center text-brand-navy transition-colors hover:bg-brand-light"
+                          className="flex size-8 items-center justify-center rounded-none text-brand-navy transition-colors hover:bg-brand-navy hover:text-white"
                         >
                           <Plus className="size-3.5" />
                         </button>
                       </div>
 
-                      <p className="text-sm font-bold text-brand-navy tabular-nums">
+                      <p className="font-display text-base font-bold tabular-nums text-brand-navy">
                         ${(item.unitPrice * item.quantity).toFixed(2)}
                       </p>
                     </div>
@@ -147,12 +153,16 @@ export function CartDrawer() {
               ))}
             </ul>
 
-            <SheetFooter>
-              <div className="flex items-center justify-between text-base font-semibold text-brand-navy">
-                <span>Subtotal</span>
-                <span className="tabular-nums">${subtotal.toFixed(2)}</span>
+            <SheetFooter className="gap-4 border-border p-5">
+              <div className="flex items-center justify-between border-b border-border pb-4">
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                  Subtotal
+                </span>
+                <span className="font-display text-xl font-bold tabular-nums text-brand-navy">
+                  ${subtotal.toFixed(2)}
+                </span>
               </div>
-              <p className="text-xs text-muted-foreground">
+              <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
                 Shipping &amp; taxes are calculated at checkout.
               </p>
               <button
@@ -164,7 +174,7 @@ export function CartDrawer() {
                   );
                 }}
                 className={cn(
-                  "flex h-12 w-full items-center justify-center rounded-xl bg-brand-navy px-5 text-sm font-semibold text-white transition-colors hover:bg-brand-blue"
+                  "flex h-12 w-full items-center justify-center rounded-none bg-brand-navy px-7 text-[13px] font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-brand-blue"
                 )}
               >
                 Checkout
@@ -173,7 +183,7 @@ export function CartDrawer() {
                 render={
                   <button
                     type="button"
-                    className="text-center text-sm font-medium text-muted-foreground transition-colors hover:text-brand-navy"
+                    className="text-center font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-brand-navy"
                   />
                 }
               >

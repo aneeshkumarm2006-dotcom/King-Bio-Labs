@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Star } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import type { Product } from "@/lib/data/products";
@@ -10,6 +10,11 @@ type ProductCardProps = {
   className?: string;
 };
 
+/**
+ * Dossier catalog tile: a sharp-cornered, hairline-framed plate with a mono
+ * spec header, an object-contain "plate" image, and a baseline price + arrow
+ * link instead of a filled button.
+ */
 export function ProductCard({ product, className }: ProductCardProps) {
   const {
     slug,
@@ -24,71 +29,77 @@ export function ProductCard({ product, className }: ProductCardProps) {
   } = product;
 
   const points = Math.floor(price);
+  const href = `/product/${slug}`;
 
   return (
     <div
       className={cn(
-        "group relative flex flex-col overflow-hidden rounded-lg border bg-surface transition-colors hover:border-primary/40",
+        "group relative flex flex-col border border-border bg-white transition-colors hover:border-brand-navy",
         className
       )}
     >
+      {/* Spec header */}
+      <div className="flex items-center justify-between gap-2 border-b border-border px-4 py-2.5">
+        <span className="truncate font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+          {category}
+        </span>
+        {bestSelling && (
+          <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-blue">
+            ★ Best Selling
+          </span>
+        )}
+      </div>
+
+      {/* Plate */}
       <Link
-        href={`/product/${slug}`}
-        className="relative block aspect-square overflow-hidden bg-background"
+        href={href}
+        className="relative block aspect-[4/3] overflow-hidden bg-surface-2"
       >
         <Image
           src={image ?? "/vial-product.svg"}
           alt={`Research vial of ${name}`}
           fill
           sizes="(max-width: 768px) 50vw, 320px"
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="object-contain p-6 transition-transform duration-500 group-hover:scale-[1.06]"
         />
-        {bestSelling && (
-          <div className="absolute right-3 top-3 flex flex-col items-end gap-1.5">
-            <div className="inline-flex items-center rounded-md border border-primary/60 bg-background/80 px-2.5 py-0.5 text-xs font-semibold text-primary backdrop-blur">
-              Best Selling
-            </div>
-          </div>
-        )}
       </Link>
 
-      <div className="flex flex-1 flex-col gap-2 p-3">
-        <div className="text-eyebrow truncate">{category}</div>
-
+      {/* Body */}
+      <div className="flex flex-1 flex-col gap-3 p-4">
         <Link
-          href={`/product/${slug}`}
-          className="font-display text-base font-semibold leading-tight hover:text-primary"
+          href={href}
+          className="font-display text-base font-semibold leading-snug text-brand-navy transition-colors hover:text-brand-blue"
         >
           {name}
         </Link>
 
-        <div className="flex items-center gap-1.5">
-          <div className="flex">
-            {Array.from({ length: 5 }, (_, i) => (
-              <Star
-                key={i}
-                className="h-3 w-3 fill-primary text-primary"
-                aria-hidden="true"
-              />
-            ))}
-          </div>
-          <span className="text-xs text-muted-foreground">
-            {rating.toFixed(1)} · {reviewCount} reviews
+        <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+          <span className="text-brand-navy">{rating.toFixed(1)}</span>
+          <span aria-hidden="true" className="text-brand-blue">
+            ★
           </span>
+          <span aria-hidden="true" className="h-3 w-px bg-border" />
+          <span>{reviewCount} reviews</span>
         </div>
 
-        <div className="flex items-baseline gap-2">
-          <span className="text-lg font-bold">${price.toFixed(2)}</span>
-        </div>
-
-        <p className="text-xs text-muted-foreground">Collect {points} points</p>
-
-        <div className="mt-auto pt-1">
+        <div className="mt-auto flex items-end justify-between gap-3 border-t border-border pt-3">
+          <div className="flex flex-col">
+            <span className="font-display text-xl font-bold tabular-nums text-brand-navy">
+              ${price.toFixed(2)}
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+              Collect {points} pts
+            </span>
+          </div>
           <Link
-            href={`/product/${slug}`}
-            className="inline-flex h-9 w-full items-center justify-center gap-2 whitespace-nowrap rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            href={href}
+            className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-brand-navy transition-colors hover:text-brand-blue"
           >
             {hasVariants ? "Select Options" : "View Product"}
+            <ArrowRight
+              className="size-3.5 transition-transform group-hover:translate-x-1"
+              aria-hidden="true"
+            />
           </Link>
         </div>
       </div>

@@ -1,10 +1,111 @@
 // Site-wide footer. Rendered once in the root layout so every page shares it.
-/* eslint-disable @next/next/no-img-element */
-const FOOTER_HTML = `<footer class="border-t bg-surface/40"><div class="mx-auto max-w-7xl px-4 py-14 sm:px-6"><div class="mb-10 flex flex-col items-start gap-3"><span class="text-xl font-bold uppercase tracking-widest text-foreground">Wick Peptides</span><p class="text-xs text-muted-foreground">Confirmed Purity. Built For Serious Researchers.</p></div><div class="grid gap-10 md:grid-cols-4"><div><h3 class="text-eyebrow mb-4">About</h3><ul class="space-y-2 text-sm"><li><a href="/about" class="text-muted-foreground hover:text-foreground">About Us</a></li><li><a href="/contact" class="text-muted-foreground hover:text-foreground">Contact Us</a></li><li><a href="/affiliates" class="text-muted-foreground hover:text-foreground">Affiliate Program</a></li><li><a href="/account" class="text-muted-foreground hover:text-foreground">Account</a></li></ul></div><div><h3 class="text-eyebrow mb-4">Shop</h3><ul class="space-y-2 text-sm"><li><a href="/shop" class="text-muted-foreground hover:text-foreground">Shop</a></li><li><a href="/coas" class="text-muted-foreground hover:text-foreground">COAs & Testing</a></li><li><a href="/bundle" class="text-muted-foreground hover:text-foreground">Bundles</a></li></ul></div><div><h3 class="text-eyebrow mb-4">Legal</h3><ul class="space-y-2 text-sm"><li><a href="/legal/terms" class="text-muted-foreground hover:text-foreground">Terms of Service</a></li><li><a href="/legal/privacy" class="text-muted-foreground hover:text-foreground">Privacy Policy</a></li><li><a href="/legal/refunds" class="text-muted-foreground hover:text-foreground">Refund & Return Policy</a></li><li><a href="/legal/research-disclaimer" class="text-muted-foreground hover:text-foreground">Research Use Disclaimer</a></li></ul></div><div><h3 class="text-eyebrow mb-4">Connect</h3><ul class="space-y-2 text-sm"><li><a href="mailto:support@wickpeptides.com" class="text-muted-foreground hover:text-foreground">support@wickpeptides.com</a></li><li><a href="/sitemap" class="text-muted-foreground hover:text-foreground">Sitemap</a></li></ul></div></div><div class="mt-12 border-t pt-8"><div class="flex flex-wrap items-center justify-between gap-4 text-xs text-muted-foreground"><div class="flex items-center gap-3"><span class="rounded border bg-surface px-2 py-1 font-mono">VISA</span><span class="rounded border bg-surface px-2 py-1 font-mono">MC</span><span class="rounded border bg-surface px-2 py-1 font-mono">AMEX</span><span class="rounded border bg-surface px-2 py-1 font-mono">DISC</span><span class="rounded border bg-surface px-2 py-1 font-mono">BTC</span><span class="rounded border bg-surface px-2 py-1 font-mono">ETH</span></div><p>© 2026 Wick Peptides LLC. All rights reserved.</p></div><p class="mt-6 text-xs leading-relaxed text-muted-foreground">Wick Peptides provides research-use-only materials intended for laboratory applications. Batch documentation and COAs are provided with each product. Not for human consumption. Email: support@wickpeptides.com.</p></div></div></footer>`;
+import Link from "next/link";
+
+const COLUMNS = [
+  {
+    title: "About",
+    links: [
+      { label: "About Us", href: "/about" },
+      { label: "Contact Us", href: "/contact" },
+      { label: "Affiliate Program", href: "/affiliates" },
+      { label: "Account", href: "/account" },
+    ],
+  },
+  {
+    title: "Shop",
+    links: [
+      { label: "Shop", href: "/shop" },
+      { label: "COAs & Testing", href: "/coas" },
+      { label: "Bundles", href: "/bundle" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { label: "Terms of Service", href: "/legal/terms" },
+      { label: "Privacy Policy", href: "/legal/privacy" },
+      { label: "Refund & Return Policy", href: "/legal/refunds" },
+      { label: "Research Use Disclaimer", href: "/legal/research-disclaimer" },
+    ],
+  },
+  {
+    title: "Connect",
+    links: [
+      {
+        label: "support@wickpeptides.com",
+        href: "mailto:support@wickpeptides.com",
+      },
+      { label: "Sitemap", href: "/sitemap" },
+    ],
+  },
+];
+
+const PAYMENTS = ["VISA", "MC", "AMEX", "DISC", "BTC", "ETH"];
 
 export function Footer() {
   return (
-    <div style={{ display: "contents" }} dangerouslySetInnerHTML={{ __html: FOOTER_HTML }} />
+    <footer className="border-t border-white/10 bg-brand-navy text-white">
+      <div className="mx-auto w-full max-w-[1320px] px-6 lg:px-10">
+        {/* Brand + link columns */}
+        <div className="grid gap-10 border-b border-white/10 py-14 lg:grid-cols-12 lg:py-16">
+          <div className="lg:col-span-5">
+            <span className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
+              Wick Peptides
+            </span>
+            <p className="mt-4 max-w-xs font-mono text-[11px] uppercase leading-relaxed tracking-[0.18em] text-white/55">
+              Confirmed Purity. Built For Serious Researchers.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-7">
+            {COLUMNS.map((col) => (
+              <div key={col.title}>
+                <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/45">
+                  {col.title}
+                </h3>
+                <ul className="mt-4 space-y-2.5">
+                  {col.links.map((link) => (
+                    <li key={link.label}>
+                      <Link
+                        href={link.href}
+                        className="text-sm text-white/70 transition-colors hover:text-white"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Payments, copyright, disclaimer */}
+        <div className="flex flex-col gap-6 py-8">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center gap-2">
+              {PAYMENTS.map((p) => (
+                <span
+                  key={p}
+                  className="border border-white/15 px-2.5 py-1 font-mono text-[11px] tracking-wider text-white/60"
+                >
+                  {p}
+                </span>
+              ))}
+            </div>
+            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-white/45">
+              © 2026 Wick Peptides LLC. All rights reserved.
+            </p>
+          </div>
+          <p className="max-w-3xl text-xs leading-relaxed text-white/45">
+            Wick Peptides provides research-use-only materials intended for
+            laboratory applications. Batch documentation and COAs are provided
+            with each product. Not for human consumption. Email:
+            support@wickpeptides.com.
+          </p>
+        </div>
+      </div>
+    </footer>
   );
 }
 

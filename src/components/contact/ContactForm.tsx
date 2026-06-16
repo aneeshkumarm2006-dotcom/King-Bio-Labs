@@ -48,90 +48,122 @@ export function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-5 rounded-lg border bg-surface p-6 sm:p-8"
+      className="flex flex-col rounded-none border border-border bg-white"
     >
-      <div className="flex flex-col gap-1.5">
-        <Label htmlFor="contact-name">Name</Label>
-        <Input
-          id="contact-name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Your name"
-          required
-          className="h-11"
-        />
+      <div className="flex items-center justify-between gap-3 border-b border-border px-6 py-4 lg:px-8">
+        <span className="inline-flex items-center gap-2.5 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-brand-blue">
+          <span aria-hidden="true" className="size-1.5 shrink-0 bg-brand-navy" />
+          <span className="text-brand-navy/50">§02</span>
+          Send A Message
+        </span>
       </div>
 
-      <div className="flex flex-col gap-1.5">
-        <Label htmlFor="contact-email">Email</Label>
-        <Input
-          id="contact-email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="you@example.com"
-          required
-          className="h-11"
-        />
-      </div>
+      <div className="flex flex-col gap-6 p-6 lg:p-8">
+        <div className="grid gap-6 sm:grid-cols-2">
+          <div className="flex flex-col gap-2">
+            <Label
+              htmlFor="contact-name"
+              className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
+            >
+              Name
+            </Label>
+            <Input
+              id="contact-name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Your name"
+              required
+              className="h-11 rounded-none border-brand-border"
+            />
+          </div>
 
-      <div className="flex flex-col gap-1.5">
-        <Label htmlFor="contact-subject">Subject</Label>
-        <Select
-          items={SUBJECT_OPTIONS}
-          value={subject}
-          onValueChange={(value) => {
-            if (typeof value === "string") setSubject(value);
-          }}
-        >
-          <SelectTrigger
-            id="contact-subject"
-            className="w-full justify-between data-[size=default]:h-11"
+          <div className="flex flex-col gap-2">
+            <Label
+              htmlFor="contact-email"
+              className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
+            >
+              Email
+            </Label>
+            <Input
+              id="contact-email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              required
+              className="h-11 rounded-none border-brand-border"
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <Label
+            htmlFor="contact-subject"
+            className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
           >
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {SUBJECT_OPTIONS.map((item) => (
-              <SelectItem key={item.value} value={item.value}>
-                {item.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
+            Subject
+          </Label>
+          <Select
+            items={SUBJECT_OPTIONS}
+            value={subject}
+            onValueChange={(value) => {
+              if (typeof value === "string") setSubject(value);
+            }}
+          >
+            <SelectTrigger
+              id="contact-subject"
+              className="w-full justify-between rounded-none border-brand-border data-[size=default]:h-11"
+            >
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent className="rounded-none">
+              {SUBJECT_OPTIONS.map((item) => (
+                <SelectItem key={item.value} value={item.value}>
+                  {item.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
 
-      <div className="flex flex-col gap-1.5">
-        <Label htmlFor="contact-message">Message</Label>
-        <textarea
-          id="contact-message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Tell us how we can support your research."
-          required
-          rows={6}
-          className="w-full min-w-0 resize-y rounded-md border border-input bg-transparent px-3 py-2.5 text-base shadow-sm outline-none transition-colors placeholder:text-muted-foreground focus-visible:ring-1 focus-visible:ring-ring md:text-sm"
-        />
-      </div>
+        <div className="flex flex-col gap-2">
+          <Label
+            htmlFor="contact-message"
+            className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
+          >
+            Message
+          </Label>
+          <textarea
+            id="contact-message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Tell us how we can support your research."
+            required
+            rows={6}
+            className="w-full min-w-0 resize-y rounded-none border border-brand-border bg-transparent px-3 py-2.5 text-base outline-none transition-colors placeholder:text-muted-foreground focus-visible:ring-1 focus-visible:ring-ring md:text-sm"
+          />
+        </div>
 
-      <button
-        type="submit"
-        className={cn(
-          "flex h-12 w-full items-center justify-center gap-2 rounded-md px-5 text-sm font-semibold text-primary-foreground transition-colors",
-          sent ? "bg-success" : "bg-primary hover:bg-primary/90"
-        )}
-      >
-        {sent ? (
-          <>
-            <Check className="size-4" />
-            Message Sent
-          </>
-        ) : (
-          <>
-            <Send className="size-4" />
-            Send Message
-          </>
-        )}
-      </button>
+        <button
+          type="submit"
+          className={cn(
+            "inline-flex h-12 w-full items-center justify-center gap-2 rounded-none px-7 text-[13px] font-semibold uppercase tracking-[0.12em] text-white transition-colors",
+            sent ? "bg-emerald-600" : "bg-brand-navy hover:bg-brand-blue"
+          )}
+        >
+          {sent ? (
+            <>
+              <Check className="size-4" />
+              Message Sent
+            </>
+          ) : (
+            <>
+              <Send className="size-4" />
+              Send Message
+            </>
+          )}
+        </button>
+      </div>
     </form>
   );
 }

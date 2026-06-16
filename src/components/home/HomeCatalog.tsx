@@ -255,7 +255,12 @@ export function HomeCatalog() {
             ) : (
               <div className={gridClass}>
                 {flatProducts.map((p) => (
-                  <ProductCard key={p.slug} product={p} className="border-0" />
+                  <ProductCard
+                    key={p.slug}
+                    product={p}
+                    className="border-0"
+                    compact={view === "compact"}
+                  />
                 ))}
               </div>
             )}
@@ -306,6 +311,7 @@ export function HomeCatalog() {
                               key={p.slug}
                               product={p}
                               className="border-0"
+                              compact={view === "compact"}
                             />
                           ))}
                         </div>

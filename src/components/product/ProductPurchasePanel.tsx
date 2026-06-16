@@ -45,47 +45,57 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
 
   return (
     <div className="flex flex-col">
-      {/* Breadcrumb */}
-      <nav
-        aria-label="Breadcrumb"
-        className="flex flex-wrap items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
-      >
-        <Link href="/" className="hover:text-brand-blue">
-          Home
-        </Link>
-        <ChevronRight className="size-3 text-brand-navy/40" aria-hidden="true" />
-        <Link href="/shop" className="hover:text-brand-blue">
-          Shop
-        </Link>
-        <ChevronRight className="size-3 text-brand-navy/40" aria-hidden="true" />
-        <span className="text-brand-navy">{product.category}</span>
-      </nav>
+      {/* Top ledger row — breadcrumb left, rating right */}
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-4">
+        <nav
+          aria-label="Breadcrumb"
+          className="flex flex-wrap items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
+        >
+          <Link href="/" className="hover:text-brand-blue">
+            Home
+          </Link>
+          <ChevronRight className="size-3 text-brand-navy/40" aria-hidden="true" />
+          <Link href="/shop" className="hover:text-brand-blue">
+            Shop
+          </Link>
+          <ChevronRight className="size-3 text-brand-navy/40" aria-hidden="true" />
+          <span className="text-brand-navy">{product.category}</span>
+        </nav>
+        <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+          <StarRating rating={product.rating} showValue size={16} />
+          <span aria-hidden="true" className="h-3 w-px bg-border" />
+          <a
+            href="#reviews"
+            className="text-brand-navy underline-offset-4 transition-colors hover:text-brand-blue hover:underline"
+          >
+            {product.reviewCount} reviews
+          </a>
+        </div>
+      </div>
 
       {/* Title */}
-      <h1 className="mt-5 font-display text-3xl font-bold leading-[1.05] tracking-tight text-brand-navy sm:text-4xl">
+      <h1 className="mt-6 font-display text-3xl font-bold leading-[1.05] tracking-tight text-brand-navy sm:text-4xl lg:text-5xl">
         {product.name}
       </h1>
 
-      {/* Rating + reviews anchor */}
-      <div className="mt-4 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-        <StarRating rating={product.rating} showValue size={16} />
-        <span aria-hidden="true" className="h-3 w-px bg-border" />
-        <a
-          href="#reviews"
-          className="text-brand-navy underline-offset-4 transition-colors hover:text-brand-blue hover:underline"
-        >
-          {product.reviewCount} reviews
-        </a>
-      </div>
-
-      {/* Price */}
-      <div className="mt-6 flex items-end justify-between gap-4 border-t border-border pt-6">
-        <p className="font-display text-5xl font-bold tabular-nums text-brand-navy">
-          ${total.toFixed(2)}
-        </p>
-        <p className="pb-1 text-right font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-          Collect {points} points on this order
-        </p>
+      {/* Price ledger — split price / points cells */}
+      <div className="mt-6 grid grid-cols-1 border border-border sm:grid-cols-[1fr_auto]">
+        <div className="flex flex-col gap-1 border-b border-border px-5 py-5 sm:border-b-0 sm:border-r">
+          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            Order total
+          </span>
+          <p className="font-display text-5xl font-bold tabular-nums text-brand-navy">
+            ${total.toFixed(2)}
+          </p>
+        </div>
+        <div className="flex flex-col justify-center gap-1 px-5 py-5 sm:text-right">
+          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            Rewards
+          </span>
+          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-brand-navy">
+            Collect {points} points
+          </p>
+        </div>
       </div>
 
       {/* Dosage selector — only when the product has variants */}

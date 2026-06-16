@@ -40,7 +40,81 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full">
-      {/* Utility ticker */}
+      {/* Main bar — wordmark centered, nav split to the left, actions right */}
+      <div
+        className={cn(
+          "border-b transition-colors duration-300",
+          scrolled || mobileOpen
+            ? "border-border bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/80"
+            : "border-border/60 bg-white"
+        )}
+      >
+        <div className="mx-auto grid h-16 w-full max-w-[1320px] grid-cols-[1fr_auto_1fr] items-center px-6 lg:h-[4.5rem] lg:px-10">
+          {/* Left: nav (desktop) / menu (mobile) */}
+          <div className="flex items-center">
+            <button
+              type="button"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileOpen}
+              onClick={() => setMobileOpen((open) => !open)}
+              className="inline-flex size-10 items-center justify-center text-brand-navy transition-colors hover:bg-brand-light lg:hidden"
+            >
+              {mobileOpen ? (
+                <X className="size-5" aria-hidden="true" />
+              ) : (
+                <Menu className="size-5" aria-hidden="true" />
+              )}
+            </button>
+            <nav className="hidden items-center lg:flex">
+              {NAV_LINKS.map((link) => {
+                const active = isActive(link.href);
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    data-status={active ? "active" : undefined}
+                    className="group relative py-2 pr-6 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-brand-navy data-[status=active]:text-brand-navy"
+                  >
+                    <span className="absolute -bottom-0 left-0 h-0.5 w-5 origin-left scale-x-0 bg-brand-navy transition-transform duration-300 group-hover:scale-x-100 group-data-[status=active]:scale-x-100" />
+                    {link.label}
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
+
+          {/* Center: wordmark */}
+          <Link
+            href="/"
+            className="flex shrink-0 items-center gap-2.5 justify-self-center"
+            aria-label="Wick Peptides home"
+          >
+            <span
+              aria-hidden="true"
+              className="flex size-7 items-center justify-center bg-brand-navy font-mono text-[11px] font-bold text-white"
+            >
+              W
+            </span>
+            <span className="font-display text-lg font-extrabold tracking-tight text-brand-navy sm:text-xl">
+              Wick Peptides
+            </span>
+          </Link>
+
+          {/* Right: actions */}
+          <div className="flex items-center justify-end gap-1">
+            <Link
+              href="/auth"
+              aria-label="Account"
+              className="hidden size-10 items-center justify-center text-brand-navy transition-colors hover:bg-brand-light sm:inline-flex"
+            >
+              <User className="size-4" aria-hidden="true" />
+            </Link>
+            <CartButton />
+          </div>
+        </div>
+      </div>
+
+      {/* Sub-bar — relocated ticker now sits beneath the main bar */}
       <div className="hidden border-b border-white/10 bg-brand-navy text-white sm:block">
         <div className="mx-auto flex w-full max-w-[1320px] items-center justify-between px-6 lg:px-10">
           <div className="flex items-center gap-5 overflow-hidden py-2">
@@ -67,78 +141,6 @@ export function Navbar() {
           >
             Affiliate Program →
           </Link>
-        </div>
-      </div>
-
-      {/* Main bar */}
-      <div
-        className={cn(
-          "border-b transition-colors duration-300",
-          scrolled || mobileOpen
-            ? "border-border bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/80"
-            : "border-border/60 bg-white"
-        )}
-      >
-        <div className="mx-auto flex h-16 w-full max-w-[1320px] items-center justify-between px-6 lg:h-20 lg:px-10">
-          {/* Wordmark */}
-          <Link
-            href="/"
-            className="flex shrink-0 items-center gap-2.5"
-            aria-label="Wick Peptides home"
-          >
-            <span
-              aria-hidden="true"
-              className="flex size-7 items-center justify-center bg-brand-navy font-mono text-[11px] font-bold text-white"
-            >
-              W
-            </span>
-            <span className="font-display text-lg font-extrabold tracking-tight text-brand-navy sm:text-xl">
-              Wick Peptides
-            </span>
-          </Link>
-
-          {/* Desktop nav — right aligned, mono, top tick on active/hover */}
-          <nav className="hidden items-stretch self-stretch lg:flex">
-            {NAV_LINKS.map((link) => {
-              const active = isActive(link.href);
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  data-status={active ? "active" : undefined}
-                  className="group relative flex items-center px-5 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-brand-navy data-[status=active]:text-brand-navy"
-                >
-                  <span className="absolute inset-x-4 top-0 h-0.5 origin-left scale-x-0 bg-brand-navy transition-transform duration-300 group-hover:scale-x-100 group-data-[status=active]:scale-x-100" />
-                  {link.label}
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* Right actions */}
-          <div className="flex items-center gap-1">
-            <Link
-              href="/auth"
-              aria-label="Account"
-              className="hidden size-10 items-center justify-center text-brand-navy transition-colors hover:bg-brand-light sm:inline-flex"
-            >
-              <User className="size-4" aria-hidden="true" />
-            </Link>
-            <CartButton />
-            <button
-              type="button"
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
-              aria-expanded={mobileOpen}
-              onClick={() => setMobileOpen((open) => !open)}
-              className="inline-flex size-10 items-center justify-center text-brand-navy transition-colors hover:bg-brand-light lg:hidden"
-            >
-              {mobileOpen ? (
-                <X className="size-5" aria-hidden="true" />
-              ) : (
-                <Menu className="size-5" aria-hidden="true" />
-              )}
-            </button>
-          </div>
         </div>
       </div>
 

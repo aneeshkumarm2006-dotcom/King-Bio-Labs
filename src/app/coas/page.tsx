@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { BadgeCheck, ChartColumn, FlaskConical } from "lucide-react";
 
+import { SectionHeader } from "@/components/SectionHeader";
 import { CoaList } from "@/components/coas/CoaList";
 
 export const metadata: Metadata = {
@@ -30,51 +31,40 @@ const METHODS = [
 export default function CoasPage() {
   return (
     <main className="flex-1">
-      {/* Intro */}
-      <section className="bg-white">
-        <div className="mx-auto w-full max-w-[1320px] px-6 lg:px-10">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border py-4 font-mono text-[11px] uppercase tracking-[0.22em]">
-            <span className="flex items-center gap-2.5 text-brand-blue">
-              <span aria-hidden="true" className="size-1.5 bg-brand-navy" />
-              TRANSPARENCY
-            </span>
-            <span className="hidden text-brand-navy/45 sm:inline">
-              Wick Peptides / Certificates of Analysis
-            </span>
-          </div>
-
-          <div className="grid items-end gap-x-10 gap-y-6 py-16 lg:grid-cols-12 lg:py-24">
-            <h1 className="font-display text-[2.75rem] font-extrabold leading-[1.0] tracking-tight text-brand-navy sm:text-5xl lg:col-span-7 lg:text-6xl">
-              Every Batch Tested. Every Result Published.
-            </h1>
-            <p className="self-end text-base leading-relaxed text-muted-foreground lg:col-span-5">
-              No compound leaves our facility until an independent accredited
-              laboratory has verified it. A Certificate of Analysis is linked to
-              every batch, so you can confirm any vial you receive by its batch
-              number.
-            </p>
-          </div>
+      {/* Centered intro */}
+      <section className="border-b border-border bg-white">
+        <div className="mx-auto w-full max-w-[1320px] px-6 py-20 lg:px-10 lg:py-28">
+          <SectionHeader
+            align="center"
+            label="Transparency"
+            title="Every Batch Tested. Every Result Published."
+            lede="No compound leaves our facility until an independent accredited laboratory has verified it. A Certificate of Analysis is linked to every batch, so you can confirm any vial you receive by its batch number."
+          />
         </div>
       </section>
 
-      {/* Method ledger */}
-      <section className="border-t border-border bg-white">
-        <div className="mx-auto w-full max-w-[1320px] px-6 py-14 lg:px-10 lg:py-16">
-          <div className="grid gap-px border border-border bg-border sm:grid-cols-3">
+      {/* Method ledger — horizontal numbered rows */}
+      <section className="border-b border-border bg-surface">
+        <div className="mx-auto w-full max-w-[1320px] px-6 py-16 lg:px-10 lg:py-20">
+          <div className="border-t border-border">
             {METHODS.map(({ icon: Icon, title, text }, i) => (
-              <div key={title} className="flex flex-col gap-4 bg-white p-6 lg:p-8">
-                <div className="flex items-center justify-between gap-3">
-                  <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-brand-navy/50">
-                    §{String(i + 1).padStart(2, "0")}
-                  </span>
-                  <Icon className="size-5 shrink-0 text-brand-blue" aria-hidden="true" />
-                </div>
-                <h3 className="font-display text-lg font-semibold text-brand-navy">
+              <div
+                key={title}
+                className="grid items-start gap-x-8 gap-y-3 border-b border-border py-8 md:grid-cols-[6rem_14rem_minmax(0,1fr)_auto]"
+              >
+                <span className="font-display text-4xl font-extrabold leading-none tabular-nums text-brand-navy/15">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="font-display text-xl font-semibold text-brand-navy">
                   {title}
                 </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
+                <p className="text-base leading-relaxed text-muted-foreground">
                   {text}
                 </p>
+                <Icon
+                  className="size-6 shrink-0 text-brand-blue md:justify-self-end"
+                  aria-hidden="true"
+                />
               </div>
             ))}
           </div>
@@ -82,7 +72,7 @@ export default function CoasPage() {
       </section>
 
       {/* Published COAs */}
-      <section className="border-t border-border bg-white">
+      <section className="bg-white">
         <div className="mx-auto w-full max-w-[1320px] px-6 py-20 lg:px-10 lg:py-28">
           <CoaList />
         </div>

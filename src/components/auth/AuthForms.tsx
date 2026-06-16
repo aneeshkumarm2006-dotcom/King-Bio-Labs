@@ -39,7 +39,17 @@ export function AuthForms() {
 
   return (
     <div className="w-full border border-brand-border bg-white">
-      {/* Tab bar */}
+      {/* Ledger header: title left, mode index right */}
+      <div className="flex items-center justify-between border-b border-brand-border px-6 py-4 sm:px-8">
+        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+          {tab === "login" ? "Returning Researcher" : "New Researcher"}
+        </span>
+        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-brand-navy/45">
+          §0{tab === "login" ? 1 : 2} / 02
+        </span>
+      </div>
+
+      {/* Tab switcher as a vertical-stacked segmented row */}
       <div className="grid grid-cols-2 border-b border-brand-border">
         {tabs.map((t, i) => (
           <button

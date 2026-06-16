@@ -46,20 +46,18 @@ export function ContactForm() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col rounded-none border border-border bg-white"
-    >
-      <div className="flex items-center justify-between gap-3 border-b border-border px-6 py-4 lg:px-8">
-        <span className="inline-flex items-center gap-2.5 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-brand-blue">
-          <span aria-hidden="true" className="size-1.5 shrink-0 bg-brand-navy" />
-          <span className="text-brand-navy/50">§02</span>
+    <form onSubmit={handleSubmit} className="flex flex-col">
+      <div className="flex items-end justify-between gap-4 border-b-2 border-brand-navy pb-4">
+        <span className="font-display text-2xl font-bold tracking-tight text-brand-navy sm:text-3xl">
           Send A Message
+        </span>
+        <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-brand-navy/45">
+          §02
         </span>
       </div>
 
-      <div className="flex flex-col gap-6 p-6 lg:p-8">
-        <div className="grid gap-6 sm:grid-cols-2">
+      <div className="flex flex-col gap-7 pt-8">
+        <div className="grid gap-7 sm:grid-cols-2">
           <div className="flex flex-col gap-2">
             <Label
               htmlFor="contact-name"

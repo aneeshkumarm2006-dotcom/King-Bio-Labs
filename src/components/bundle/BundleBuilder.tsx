@@ -63,31 +63,30 @@ export function BundleBuilder() {
 
   return (
     <div className="mx-auto w-full max-w-[1320px] px-6 py-20 lg:px-10 lg:py-28">
-      {/* Dossier header */}
-      <div className="border-t border-border pt-6">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <SectionLabel index="01">Bundle &amp; Save · 10% Off</SectionLabel>
-          <span className="border border-border px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-brand-navy">
-            Standing 10% — no code
-          </span>
-        </div>
-        <div className="mt-6 grid gap-x-10 gap-y-4 lg:grid-cols-12">
-          <h1 className="font-display text-4xl font-bold leading-[1.04] tracking-tight text-brand-navy sm:text-5xl lg:col-span-7 lg:text-[3.25rem]">
-            Assemble Your Bundle
-          </h1>
-          <p className="self-end text-base leading-relaxed text-muted-foreground lg:col-span-5">
-            Pick any 5 peptides and 10% comes off automatically.
-          </p>
-        </div>
-      </div>
+      {/* Full-bleed stacked headline band — centered intro */}
+      <header className="flex flex-col items-center border-y border-border py-12 text-center lg:py-16">
+        <SectionLabel index="01">Bundle &amp; Save · 10% Off</SectionLabel>
+        <h1 className="mt-8 font-display text-5xl font-bold leading-[0.98] tracking-tight text-brand-navy sm:text-6xl lg:text-[5rem]">
+          Assemble Your
+          <br />
+          Bundle
+        </h1>
+        <p className="mt-7 max-w-md text-base leading-relaxed text-muted-foreground">
+          Pick any 5 peptides and 10% comes off automatically.
+        </p>
+        <span className="mt-8 border border-border px-4 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-brand-navy">
+          Standing 10% — no code
+        </span>
+      </header>
 
-      <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-10 lg:grid-cols-[1fr_360px]">
+      {/* Flipped split — sticky ledger on the LEFT, selection grid on the right */}
+      <div className="mt-16 grid grid-cols-1 gap-x-10 gap-y-10 lg:grid-cols-[360px_1fr]">
         {/* Step 1 — product selection grid */}
-        <div className="border-t border-border pt-6">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-brand-navy/50">
-                §01
+        <div className="lg:order-2">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-5">
+            <div className="flex items-baseline gap-4">
+              <span className="font-display text-4xl font-extrabold leading-none tabular-nums text-brand-navy/15">
+                01
               </span>
               <h2 className="font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-brand-blue">
                 Choose your compounds
@@ -182,8 +181,8 @@ export function BundleBuilder() {
           </ul>
         </div>
 
-        {/* Order summary — ruled ledger, sticky on desktop */}
-        <aside className="lg:sticky lg:top-24 lg:self-start">
+        {/* Order summary — ruled ledger, sticky on desktop, on the left rail */}
+        <aside className="lg:order-1 lg:sticky lg:top-24 lg:self-start">
           <div className="border border-border bg-white">
             {/* Ledger head */}
             <div className="flex items-center justify-between gap-3 border-b border-border px-6 py-4">

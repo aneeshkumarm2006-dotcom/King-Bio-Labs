@@ -12,54 +12,55 @@ export const metadata: Metadata = {
 export default function AuthPage() {
   return (
     <main className="flex-1 bg-brand-light">
-      <section className="border-b border-border bg-white">
-        <div className="mx-auto w-full max-w-[1320px] px-6 lg:px-10">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border py-4 font-mono text-[11px] uppercase tracking-[0.22em]">
-            <span className="flex items-center gap-2.5 text-brand-blue">
-              <span aria-hidden="true" className="size-1.5 bg-brand-navy" />
+      <div className="mx-auto grid w-full max-w-[1320px] grid-cols-1 lg:grid-cols-2">
+        {/* Full-bleed navy intro panel */}
+        <section className="relative flex flex-col justify-between gap-16 border-border bg-brand-navy px-6 py-16 lg:border-r lg:px-10 lg:py-24">
+          <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.22em] text-white/60">
+            <span className="flex items-center gap-2.5 text-white">
+              <span aria-hidden="true" className="size-1.5 bg-white/70" />
+              Secure Terminal
+            </span>
+            <span className="hidden sm:inline">01 / 01</span>
+          </div>
+
+          <div className="flex flex-col gap-6">
+            <SectionLabel
+              index="01"
+              className="text-white/70 [&>span:first-child]:bg-white/70"
+            >
               Account Access
-            </span>
-            <span className="hidden text-brand-navy/45 sm:inline">
-              Wick Peptides / Secure Terminal
-            </span>
+            </SectionLabel>
+            <h1 className="font-display text-5xl font-bold leading-[1.02] tracking-tight text-white sm:text-6xl lg:text-7xl">
+              Wick
+              <br />
+              Peptides
+            </h1>
+            <p className="max-w-md text-base leading-relaxed text-white/70">
+              Log in to handle orders, pull down COAs, and follow your
+              research history.
+            </p>
           </div>
-        </div>
-      </section>
 
-      <section className="bg-brand-light">
-        <div className="mx-auto w-full max-w-[1320px] px-6 py-16 lg:px-10 lg:py-24">
-          <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-10">
-            {/* Dossier intro */}
-            <div className="flex flex-col gap-6 lg:col-span-6">
-              <SectionLabel index="01">Account Access</SectionLabel>
-              <h1 className="font-display text-4xl font-bold leading-[1.05] tracking-tight text-brand-navy sm:text-5xl">
-                Wick Peptides
-              </h1>
-              <p className="max-w-md text-base leading-relaxed text-muted-foreground">
-                Log in to handle orders, pull down COAs, and follow your
-                research history.
-              </p>
+          <p className="max-w-md border-t border-white/15 pt-6 text-xs leading-relaxed text-white/60">
+            This platform is for qualified researchers only. All products
+            are for in-vitro laboratory research use only.{" "}
+            <a
+              href="/legal/research-disclaimer"
+              className="text-white underline-offset-4 hover:underline"
+            >
+              Learn more
+            </a>
+            .
+          </p>
+        </section>
 
-              <p className="mt-2 max-w-md border-t border-border pt-6 text-xs leading-relaxed text-muted-foreground">
-                This platform is for qualified researchers only. All products
-                are for in-vitro laboratory research use only.{" "}
-                <a
-                  href="/legal/research-disclaimer"
-                  className="text-brand-blue underline-offset-4 hover:underline"
-                >
-                  Learn more
-                </a>
-                .
-              </p>
-            </div>
-
-            {/* Auth forms (client — tabs for login / register) */}
-            <div className="lg:col-span-6 lg:col-start-8">
-              <AuthForms />
-            </div>
+        {/* Auth forms (client — tabs for login / register) */}
+        <section className="flex items-center justify-center px-6 py-16 lg:px-10 lg:py-24">
+          <div className="w-full max-w-md">
+            <AuthForms />
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
   );
 }

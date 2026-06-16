@@ -35,23 +35,27 @@ export function ShopGrid({ search, selectedCategories }: ShopGridProps) {
     <div className="flex flex-col gap-px bg-border">
       {groups.map((c) => (
         <section key={c.slug} id={c.slug} className="scroll-mt-24 bg-white">
-          {/* Ruled category header bar */}
-          <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 border-b border-border px-5 py-4 lg:px-8">
-            <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+          {/* Oversized index numeral header with stacked label + name */}
+          <div className="flex items-start gap-5 px-5 py-6 lg:px-8">
+            <span
+              aria-hidden="true"
+              className="font-display text-5xl font-extrabold leading-none tracking-tight tabular-nums text-brand-navy/12 sm:text-6xl"
+            >
+              {c.id}
+            </span>
+            <div className="flex flex-1 flex-col gap-1.5 pt-1">
               <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-brand-blue">
-                {c.id} · CATEGORY
+                Category · {c.products.length} compounds available
               </span>
               <h2 className="font-display text-xl font-bold text-brand-navy sm:text-2xl">
                 {c.name}
               </h2>
             </div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-              {c.products.length} compounds available
-            </p>
           </div>
 
-          {/* Hairline-gap product grid */}
-          <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
+          {/* Hairline product grid — borders drawn on the cards so an
+              incomplete last row leaves no gray empty cells. */}
+          <div className="grid grid-cols-1 border-t border-border bg-white [&>*]:border-b [&>*]:border-r [&>*]:border-border sm:grid-cols-2 lg:grid-cols-3">
             {c.products.map((p) => (
               <ProductCard key={p.slug} product={p} className="border-0" />
             ))}

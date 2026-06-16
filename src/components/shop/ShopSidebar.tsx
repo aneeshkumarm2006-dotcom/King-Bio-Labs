@@ -32,52 +32,60 @@ export function ShopSidebar({
 
   return (
     <aside className="flex flex-col bg-white lg:sticky lg:top-24 lg:self-start">
-      {/* Mono panel header */}
-      <h2 className="border-b border-border px-5 py-4 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-brand-blue">
-        Filter by category
-      </h2>
-
-      {/* Checkbox rows */}
-      <div className="flex flex-col">
-        {CATEGORIES.map((c) => {
-          const checked = draft.includes(c.slug);
-          return (
-            <label
-              key={c.slug}
-              className="flex cursor-pointer items-start gap-3 border-b border-border px-5 py-3 text-sm transition-colors hover:bg-surface"
-            >
-              <Checkbox
-                checked={checked}
-                onCheckedChange={(value) => toggle(c.slug, Boolean(value))}
-                className="mt-0.5 rounded-none border-primary"
-              />
-              <span className="leading-tight text-muted-foreground">
-                {c.name}
-              </span>
-            </label>
-          );
-        })}
+      {/* Mono panel header with live count */}
+      <div className="flex items-baseline justify-between gap-3 border-b border-border px-5 py-4">
+        <h2 className="font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-brand-blue">
+          Filter by category
+        </h2>
+        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground tabular-nums">
+          {draft.length || "All"}
+        </span>
       </div>
 
-      {/* Sharp action buttons */}
-      <div className="flex gap-px bg-border p-px">
+      {/* Action buttons stacked at the top of the rail */}
+      <div className="flex flex-col gap-px border-b border-border bg-border">
+        <button
+          type="button"
+          onClick={() => onApply(draft)}
+          className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-none bg-brand-navy px-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-brand-blue focus-visible:outline-none"
+        >
+          Apply
+        </button>
         <button
           type="button"
           onClick={() => {
             setDraft([]);
             onClear();
           }}
-          className="inline-flex h-11 flex-1 items-center justify-center whitespace-nowrap rounded-none border border-brand-navy bg-white px-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-navy transition-colors hover:bg-brand-navy hover:text-white focus-visible:outline-none"
+          className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-none bg-white px-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-navy transition-colors hover:bg-brand-navy hover:text-white focus-visible:outline-none"
         >
           Reset
         </button>
-        <button
-          type="button"
-          onClick={() => onApply(draft)}
-          className="inline-flex h-11 flex-1 items-center justify-center whitespace-nowrap rounded-none bg-brand-navy px-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-brand-blue focus-visible:outline-none"
-        >
-          Apply
-        </button>
+      </div>
+
+      {/* Numbered category ledger */}
+      <div className="flex flex-col">
+        {CATEGORIES.map((c, i) => {
+          const checked = draft.includes(c.slug);
+          return (
+            <label
+              key={c.slug}
+              className="flex cursor-pointer items-center gap-3 border-b border-border px-5 py-3 text-sm transition-colors hover:bg-surface"
+            >
+              <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-brand-navy/40 tabular-nums">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span className="flex-1 leading-tight text-muted-foreground">
+                {c.name}
+              </span>
+              <Checkbox
+                checked={checked}
+                onCheckedChange={(value) => toggle(c.slug, Boolean(value))}
+                className="rounded-none border-primary"
+              />
+            </label>
+          );
+        })}
       </div>
     </aside>
   );

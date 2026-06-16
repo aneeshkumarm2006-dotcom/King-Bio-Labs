@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Clock, Mail } from "lucide-react";
 
+import { SectionLabel } from "@/components/SectionLabel";
 import { ContactForm } from "@/components/contact/ContactForm";
 
 export const metadata: Metadata = {
@@ -32,24 +33,15 @@ const INFO_CARDS = [
 export default function ContactPage() {
   return (
     <main className="flex-1">
-      {/* Dossier hero */}
+      {/* Centered full-bleed intro */}
       <section className="border-b border-border bg-white">
-        <div className="mx-auto w-full max-w-[1320px] px-6 lg:px-10">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border py-4 font-mono text-[11px] uppercase tracking-[0.22em]">
-            <span className="flex items-center gap-2.5 text-brand-blue">
-              <span aria-hidden="true" className="size-1.5 bg-brand-navy" />
-              CONTACT
-            </span>
-            <span className="hidden text-brand-navy/45 sm:inline">
-              Wick Peptides / Research-Grade Compounds
-            </span>
-          </div>
-
-          <div className="grid items-end gap-x-10 gap-y-6 py-16 lg:grid-cols-12 lg:py-24">
-            <h1 className="font-display text-[2.75rem] font-extrabold leading-[0.98] tracking-tight text-brand-navy sm:text-6xl lg:col-span-7 lg:text-[4rem]">
+        <div className="mx-auto w-full max-w-[1320px] px-6 py-20 lg:px-10 lg:py-28">
+          <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
+            <SectionLabel className="justify-center">Contact</SectionLabel>
+            <h1 className="mt-8 font-display text-[2.75rem] font-extrabold leading-[0.98] tracking-tight text-brand-navy sm:text-6xl lg:text-[5rem]">
               Get In Touch
             </h1>
-            <p className="self-end text-base leading-relaxed text-muted-foreground lg:col-span-5">
+            <p className="mt-7 max-w-xl text-base leading-relaxed text-muted-foreground">
               Have a question about a product, an order, or a Certificate of
               Analysis? Our team is ready to help — drop us a message and
               we&apos;ll reply within a day.
@@ -58,31 +50,32 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Asymmetric split — info ledger + form */}
+      {/* Form-forward split — form leads, contact rail trails */}
       <section className="bg-white">
         <div className="mx-auto grid w-full max-w-[1320px] gap-12 px-6 py-20 lg:grid-cols-12 lg:gap-16 lg:px-10 lg:py-28">
-          {/* Left column — info as ruled hairline rows */}
-          <div className="lg:col-span-5">
-            <div className="flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
-              <span className="inline-flex items-center gap-2.5 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-brand-blue">
-                <span aria-hidden="true" className="size-1.5 shrink-0 bg-brand-navy" />
-                <span className="text-brand-navy/50">§01</span>
-                Reach Us
-              </span>
-            </div>
+          {/* Form takes the wide lead column */}
+          <div className="lg:col-span-7">
+            <ContactForm />
+          </div>
 
-            <dl className="mt-8 border-t border-border">
-              {INFO_CARDS.map(({ icon: Icon, title, body }) => (
+          {/* Reach-us rail — stacked oversized index rows */}
+          <aside className="lg:col-span-5">
+            <SectionLabel index="01">Reach Us</SectionLabel>
+            <dl className="mt-8">
+              {INFO_CARDS.map(({ icon: Icon, title, body }, i) => (
                 <div
                   key={title}
-                  className="grid items-start gap-x-6 gap-y-2 border-b border-border py-6 sm:grid-cols-[2.5rem_minmax(0,1fr)]"
+                  className="flex items-start gap-5 border-t border-border py-7 last:border-b"
                 >
-                  <Icon
-                    className="size-5 shrink-0 text-brand-blue"
-                    aria-hidden="true"
-                  />
-                  <div className="flex flex-col gap-2">
-                    <dt className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+                  <span className="font-display text-3xl font-extrabold leading-none tabular-nums text-brand-navy/15">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="flex flex-1 flex-col gap-2">
+                    <dt className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+                      <Icon
+                        className="size-4 shrink-0 text-brand-blue"
+                        aria-hidden="true"
+                      />
                       {title}
                     </dt>
                     <dd className="text-base text-brand-navy">{body}</dd>
@@ -90,12 +83,10 @@ export default function ContactPage() {
                 </div>
               ))}
             </dl>
-          </div>
-
-          {/* Right column — contact form */}
-          <div className="lg:col-span-7">
-            <ContactForm />
-          </div>
+            <p className="mt-8 font-mono text-[11px] uppercase leading-relaxed tracking-[0.18em] text-brand-navy/45">
+              Wick Peptides / Research-Grade Compounds
+            </p>
+          </aside>
         </div>
       </section>
     </main>

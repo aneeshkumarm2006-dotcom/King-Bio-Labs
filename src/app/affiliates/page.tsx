@@ -3,6 +3,7 @@ import Link from "next/link";
 import { DollarSign, Users, BarChart3, BadgeCheck } from "lucide-react";
 
 import { SectionHeader } from "@/components/SectionHeader";
+import { SectionLabel } from "@/components/SectionLabel";
 
 export const metadata: Metadata = {
   title: "Affiliate Program",
@@ -67,48 +68,58 @@ const STEPS = [
 export default function AffiliatesPage() {
   return (
     <main className="flex-1 bg-brand-light">
-      {/* Header */}
+      {/* Hero — full-width stacked headline with the lede pinned beneath */}
       <section className="bg-white">
         <div className="mx-auto w-full max-w-[1320px] px-6 py-20 lg:px-10 lg:py-28">
-          <SectionHeader
-            index="01"
-            label="Affiliates"
-            title="Affiliate Program"
-            lede="Send qualified researchers to Wick Peptides and earn 15% on every order. The program is designed for scientists, clinicians, and professionals who rely on the standard we set."
-          />
+          <SectionLabel index="01">Affiliates</SectionLabel>
+          <h1 className="mt-8 font-display text-5xl font-bold leading-[0.97] tracking-tight text-brand-navy sm:text-6xl lg:text-[5.5rem]">
+            Affiliate
+            <br />
+            Program
+          </h1>
+          <p className="mt-8 max-w-2xl border-t border-border pt-8 text-lg leading-relaxed text-muted-foreground">
+            Send qualified researchers to Wick Peptides and earn 15% on every
+            order. The program is designed for scientists, clinicians, and
+            professionals who rely on the standard we set.
+          </p>
         </div>
       </section>
 
-      {/* Benefits — hairline grid with mono indices */}
+      {/* Benefits — horizontal numbered ledger rows, label on a left rail */}
       <section className="border-t border-border bg-white">
         <div className="mx-auto w-full max-w-[1320px] px-6 py-20 lg:px-10 lg:py-28">
-          <div className="border-t border-border pt-6">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-brand-navy/50">
-                §02
-              </span>
+          <div className="grid gap-x-10 gap-y-10 lg:grid-cols-[16rem_1fr]">
+            <div className="lg:sticky lg:top-24 lg:self-start">
+              <SectionLabel index="02">Program Benefits</SectionLabel>
+              <h2 className="mt-6 font-display text-3xl font-bold leading-tight tracking-tight text-brand-navy sm:text-4xl">
+                Why partner
+                <br />
+                with us
+              </h2>
             </div>
-            <h2 className="mt-6 font-display text-2xl font-bold tracking-tight text-brand-navy sm:text-3xl">
-              Program Benefits
-            </h2>
-          </div>
-          <div className="mt-12 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-            {BENEFITS.map(({ icon: Icon, title, description }, i) => (
-              <div key={title} className="flex flex-col gap-4 bg-white p-6 lg:p-8">
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-brand-navy/40 tabular-nums">
-                    §0{i + 1}
+            <ol className="border-t border-border">
+              {BENEFITS.map(({ icon: Icon, title, description }, i) => (
+                <li
+                  key={title}
+                  className="grid items-start gap-x-6 gap-y-3 border-b border-border py-7 sm:grid-cols-[3.5rem_auto_minmax(0,1fr)]"
+                >
+                  <span className="font-display text-3xl font-extrabold tabular-nums leading-none text-brand-navy/20">
+                    0{i + 1}
                   </span>
-                  <Icon className="size-5 text-brand-blue" aria-hidden="true" />
-                </div>
-                <h3 className="font-display text-base font-semibold text-brand-navy">
-                  {title}
-                </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  {description}
-                </p>
-              </div>
-            ))}
+                  <span className="flex size-11 items-center justify-center border border-border bg-surface text-brand-blue">
+                    <Icon className="size-5" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <h3 className="font-display text-lg font-semibold text-brand-navy">
+                      {title}
+                    </h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                      {description}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
@@ -117,20 +128,21 @@ export default function AffiliatesPage() {
       <section className="border-t border-border bg-brand-light">
         <div className="mx-auto w-full max-w-[1320px] px-6 py-20 lg:px-10 lg:py-28">
           <SectionHeader
+            align="center"
             index="03"
             label="How It Works"
             title="Earning in four steps"
           />
-          <ol className="mt-12 border-t border-border">
+          <ol className="mt-14 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
             {STEPS.map(({ number, title, description }) => (
               <li
                 key={number}
-                className="grid items-start gap-x-8 gap-y-2 border-b border-border py-7 sm:grid-cols-[4rem_16rem_minmax(0,1fr)]"
+                className="flex flex-col gap-4 bg-brand-light p-7 lg:p-8"
               >
-                <span className="font-display text-3xl font-bold tabular-nums text-brand-navy/25">
+                <span className="font-display text-6xl font-extrabold tabular-nums leading-none text-brand-navy/15">
                   {number}
                 </span>
-                <h3 className="font-display text-lg font-semibold text-brand-navy">
+                <h3 className="mt-2 border-t border-border pt-4 font-display text-lg font-semibold text-brand-navy">
                   {title}
                 </h3>
                 <p className="text-sm leading-relaxed text-muted-foreground">
@@ -144,48 +156,42 @@ export default function AffiliatesPage() {
 
       {/* Apply CTA — inverted navy ruled band */}
       <section className="border-t border-white/10 bg-brand-navy text-white">
-        <div className="mx-auto w-full max-w-[1320px] px-6 py-20 lg:px-10 lg:py-28">
-          <div className="grid items-center gap-x-10 gap-y-8 lg:grid-cols-12">
-            <div className="lg:col-span-7">
-              <span className="inline-flex items-center gap-2.5 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-white/40">
-                <span aria-hidden="true" className="size-1.5 shrink-0 bg-white/70" />
-                §04
-              </span>
-              <h2 className="mt-6 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                Ready to team up with us?
-              </h2>
-              <p className="mt-4 max-w-xl leading-relaxed text-white/70">
-                Email us to begin your application. Include your name, your
-                institution or platform, and a short description of your audience.
-              </p>
-            </div>
+        <div className="mx-auto w-full max-w-[1320px] px-6 py-20 text-center lg:px-10 lg:py-28">
+          <span className="inline-flex items-center gap-2.5 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-white/40">
+            <span aria-hidden="true" className="size-1.5 shrink-0 bg-white/70" />
+            §04
+          </span>
+          <h2 className="mx-auto mt-7 max-w-3xl font-display text-4xl font-bold leading-[1.04] tracking-tight text-white text-balance sm:text-5xl">
+            Ready to team up with us?
+          </h2>
+          <p className="mx-auto mt-5 max-w-xl leading-relaxed text-white/70">
+            Email us to begin your application. Include your name, your
+            institution or platform, and a short description of your audience.
+          </p>
 
-            <div className="flex flex-col gap-5 border-t border-white/15 pt-8 lg:col-span-5 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-              <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
-                <a
-                  href="mailto:affiliates@wickpeptides.com"
-                  className="inline-flex h-12 items-center justify-center gap-2 rounded-none bg-white px-7 text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-navy transition-colors hover:bg-brand-blue hover:text-white"
-                >
-                  Apply via Email
-                </a>
-                <Link
-                  href="/contact"
-                  className="inline-flex h-12 items-center justify-center gap-2 rounded-none border border-white/40 bg-transparent px-7 text-[13px] font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-white hover:text-brand-navy"
-                >
-                  Contact Us Instead
-                </Link>
-              </div>
-              <p className="font-mono text-[11px] uppercase leading-relaxed tracking-[0.16em] text-white/50">
-                Applications reviewed in 2 business days ·{" "}
-                <Link
-                  href="/legal/terms"
-                  className="text-white underline-offset-4 hover:underline"
-                >
-                  Program Terms Apply
-                </Link>
-              </p>
-            </div>
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a
+              href="mailto:affiliates@wickpeptides.com"
+              className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-none bg-white px-7 text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-navy transition-colors hover:bg-brand-blue hover:text-white sm:w-auto"
+            >
+              Apply via Email
+            </a>
+            <Link
+              href="/contact"
+              className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-none border border-white/40 bg-transparent px-7 text-[13px] font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-white hover:text-brand-navy sm:w-auto"
+            >
+              Contact Us Instead
+            </Link>
           </div>
+          <p className="mt-8 font-mono text-[11px] uppercase leading-relaxed tracking-[0.16em] text-white/50">
+            Applications reviewed in 2 business days ·{" "}
+            <Link
+              href="/legal/terms"
+              className="text-white underline-offset-4 hover:underline"
+            >
+              Program Terms Apply
+            </Link>
+          </p>
         </div>
       </section>
     </main>

@@ -1,8 +1,12 @@
+"use client";
+
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { BadgeCheck } from "lucide-react";
+import { BadgeCheck, ChevronLeft, ChevronRight } from "lucide-react";
 
 import { SectionHeader } from "@/components/SectionHeader";
 import { StarRating } from "@/components/StarRating";
+import { cn } from "@/lib/utils";
 
 const TESTIMONIALS = [
   {
@@ -55,7 +59,41 @@ const TESTIMONIALS = [
   },
 ];
 
+/**
+ * Testimonials carousel: three cards visible at a time on desktop with
+ * prev/next arrow controls that page through the rest via scroll-snap.
+ */
 export function Testimonials() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(true);
+
+  const sync = useCallback(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const { scrollLeft, scrollWidth, clientWidth } = el;
+    setCanPrev(scrollLeft > 4);
+    setCanNext(scrollLeft < scrollWidth - clientWidth - 4);
+  }, []);
+
+  useEffect(() => {
+    sync();
+    const el = trackRef.current;
+    if (!el) return;
+    el.addEventListener("scroll", sync, { passive: true });
+    window.addEventListener("resize", sync);
+    return () => {
+      el.removeEventListener("scroll", sync);
+      window.removeEventListener("resize", sync);
+    };
+  }, [sync]);
+
+  const scrollByPage = (dir: 1 | -1) => {
+    const el = trackRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * el.clientWidth, behavior: "smooth" });
+  };
+
   return (
     <section className="border-b border-border bg-white">
       <div className="mx-auto w-full max-w-[1320px] px-6 py-20 lg:px-10 lg:py-28">
@@ -66,9 +104,53 @@ export function Testimonials() {
           lede="Each reviewer below is a confirmed buyer. We check every name, title, and order count against our customer ledger before it goes live."
         />
 
-        <div className="mt-12 grid gap-px border border-border bg-border md:grid-cols-2">
+        {/* Controls */}
+        <div className="mt-12 flex items-center justify-between border-t border-border pt-6">
+          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+            {TESTIMONIALS.length} verified reviews
+          </span>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => scrollByPage(-1)}
+              disabled={!canPrev}
+              aria-label="Previous testimonials"
+              className={cn(
+                "inline-flex size-11 items-center justify-center border border-border text-brand-navy transition-colors",
+                canPrev
+                  ? "hover:bg-brand-navy hover:text-white"
+                  : "cursor-not-allowed opacity-35"
+              )}
+            >
+              <ChevronLeft className="size-5" aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollByPage(1)}
+              disabled={!canNext}
+              aria-label="Next testimonials"
+              className={cn(
+                "inline-flex size-11 items-center justify-center border border-border text-brand-navy transition-colors",
+                canNext
+                  ? "hover:bg-brand-navy hover:text-white"
+                  : "cursor-not-allowed opacity-35"
+              )}
+            >
+              <ChevronRight className="size-5" aria-hidden="true" />
+            </button>
+          </div>
+        </div>
+
+        {/* Track — three cards visible at a time on desktop */}
+        <div
+          ref={trackRef}
+          className="mt-6 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
           {TESTIMONIALS.map((t) => (
-            <figure key={t.name} className="flex flex-col gap-4 bg-white p-6 lg:p-8">
+            <figure
+              key={t.name}
+              className="flex shrink-0 basis-full snap-start flex-col gap-4 border border-border bg-white p-6 sm:basis-[calc(50%-0.625rem)] lg:basis-[calc(33.333%-0.834rem)] lg:p-8"
+            >
               <div className="flex items-center justify-between gap-3">
                 <StarRating rating={5} size={15} />
                 <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-brand-blue">
@@ -93,9 +175,7 @@ export function Testimonials() {
                     {t.name}
                     <BadgeCheck className="size-4 text-brand-blue" />
                   </span>
-                  <span className="text-xs text-muted-foreground">
-                    {t.title}
-                  </span>
+                  <span className="text-xs text-muted-foreground">{t.title}</span>
                 </div>
               </figcaption>
             </figure>

@@ -36,78 +36,90 @@ const CARDS = [
 export default function AboutPage() {
   return (
     <main className="flex-1">
-      {/* Dossier hero — asymmetric editorial column, left-aligned */}
-      <section className="border-b border-border bg-white">
-        <div className="mx-auto w-full max-w-[1320px] px-6 lg:px-10">
-          {/* Dossier strip */}
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border py-4 font-mono text-[11px] uppercase tracking-[0.22em]">
-            <SectionLabel>About</SectionLabel>
-            <span className="hidden text-brand-navy/45 sm:inline">
-              Wick Peptides / Research-Grade Compounds
-            </span>
-          </div>
-
-          <div className="grid gap-x-10 gap-y-10 py-20 lg:grid-cols-12 lg:py-28">
-            <div className="lg:col-span-7">
-              <h1 className="font-display text-[2.75rem] font-extrabold leading-[0.98] tracking-tight text-brand-navy sm:text-6xl lg:text-[4.25rem]">
-                The Standard.
-                <br />
-                <span className="text-brand-blue">Set Higher.</span>
-              </h1>
-            </div>
-
-            <div className="flex flex-col gap-5 self-end lg:col-span-5">
-              {PARAGRAPHS.map((text, i) => (
-                <div
-                  key={text}
-                  className="grid grid-cols-[2.5rem_minmax(0,1fr)] gap-x-4 border-t border-border pt-5"
-                >
-                  <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-brand-navy/40">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <p className="text-base leading-relaxed text-muted-foreground">
-                    {text}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+      {/* Full-bleed stacked headline band */}
+      <section className="border-b border-border bg-brand-navy text-white">
+        <div className="mx-auto w-full max-w-[1320px] px-6 py-20 lg:px-10 lg:py-32">
+          <SectionLabel className="text-white/70 [&>span:first-child]:bg-white/70">
+            About / Wick Peptides
+          </SectionLabel>
+          <h1 className="mt-10 font-display text-[3.25rem] font-extrabold leading-[0.92] tracking-tight sm:text-7xl lg:text-[7.5rem]">
+            The Standard.
+          </h1>
+          <h1 className="font-display text-[3.25rem] font-extrabold leading-[0.92] tracking-tight text-brand-blue sm:text-7xl lg:text-[7.5rem]">
+            Set Higher.
+          </h1>
+          <p className="mt-10 max-w-xl font-mono text-[11px] uppercase leading-relaxed tracking-[0.22em] text-white/55">
+            Research-Grade Compounds — independently tested, fully published,
+            traceable from synthesis to bench.
+          </p>
         </div>
       </section>
 
-      {/* Standards ledger — hairline grid, mono indices 01–03 */}
-      <section className="border-t border-border bg-white">
+      {/* Centered manifesto — numbered horizontal ledger */}
+      <section className="border-b border-border bg-white">
         <div className="mx-auto w-full max-w-[1320px] px-6 py-20 lg:px-10 lg:py-28">
-          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
-            <SectionLabel index="01">The Standards We Hold</SectionLabel>
-            <span className="border border-border px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-brand-navy">
-              ISO-17025 verified
-            </span>
+          <div className="mx-auto max-w-3xl text-center">
+            <SectionLabel index="00" className="justify-center">
+              Why We Exist
+            </SectionLabel>
           </div>
-
-          <div className="mt-10 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-3">
-            {CARDS.map(({ icon: Icon, title, text }, i) => (
-              <div
-                key={title}
-                className="flex flex-col gap-4 bg-white p-6 lg:p-8"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-brand-navy/40">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <Icon
-                    className="size-5 shrink-0 text-brand-blue"
-                    aria-hidden="true"
-                  />
-                </div>
-                <h2 className="font-display text-lg font-bold text-brand-navy">
-                  {title}
-                </h2>
-                <p className="border-t border-border pt-4 text-sm leading-relaxed text-muted-foreground">
+          <div className="mt-14 grid gap-px border border-border bg-border md:grid-cols-3">
+            {PARAGRAPHS.map((text, i) => (
+              <div key={text} className="flex flex-col gap-6 bg-white p-8 lg:p-10">
+                <span className="font-display text-5xl font-extrabold leading-none tracking-tight tabular-nums text-brand-navy/12">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <p className="text-base leading-relaxed text-muted-foreground">
                   {text}
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Standards — flipped split: stacked rows, label rail right */}
+      <section className="bg-white">
+        <div className="mx-auto w-full max-w-[1320px] px-6 py-20 lg:px-10 lg:py-28">
+          <div className="grid gap-x-10 gap-y-12 lg:grid-cols-12">
+            <div className="lg:order-2 lg:col-span-4">
+              <div className="lg:sticky lg:top-28">
+                <SectionLabel index="01">The Standards We Hold</SectionLabel>
+                <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+                  Three commitments we never negotiate on.
+                </p>
+                <span className="mt-6 inline-block border border-border px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-brand-navy">
+                  ISO-17025 verified
+                </span>
+              </div>
+            </div>
+
+            <div className="lg:order-1 lg:col-span-8">
+              <div className="border-t border-border">
+                {CARDS.map(({ icon: Icon, title, text }, i) => (
+                  <div
+                    key={title}
+                    className="grid grid-cols-[3rem_minmax(0,1fr)_auto] items-start gap-x-6 gap-y-3 border-b border-border py-8"
+                  >
+                    <span className="font-display text-2xl font-extrabold leading-none tabular-nums text-brand-navy/15">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div className="flex flex-col gap-3">
+                      <h2 className="font-display text-xl font-bold text-brand-navy">
+                        {title}
+                      </h2>
+                      <p className="text-base leading-relaxed text-muted-foreground">
+                        {text}
+                      </p>
+                    </div>
+                    <Icon
+                      className="size-6 shrink-0 text-brand-blue"
+                      aria-hidden="true"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

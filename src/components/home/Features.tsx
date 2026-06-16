@@ -27,31 +27,39 @@ const FEATURES = [
   },
 ];
 
+/**
+ * Restructured: icon-left horizontal cards in a 2×2 arrangement, replacing the
+ * old 4-across icon-on-top grid.
+ */
 export function Features() {
   return (
     <section className="border-b border-border bg-surface">
       <div className="mx-auto w-full max-w-[1320px] px-6 py-14 lg:px-10 lg:py-20">
-        <div className="grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-px border border-border bg-border sm:grid-cols-2">
           {FEATURES.map(({ icon: Icon, title, text, href }, i) => {
             const inner = (
               <div
                 className={cn(
-                  "flex h-full flex-col gap-4 bg-white p-6 lg:p-7",
+                  "flex h-full items-start gap-5 bg-white p-7 lg:p-9",
                   href && "transition-colors group-hover:bg-brand-light"
                 )}
               >
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-blue">
-                    0{i + 1}
-                  </span>
-                  <Icon className="size-5 text-brand-navy" aria-hidden="true" />
+                <div className="flex size-12 shrink-0 items-center justify-center border border-border text-brand-navy">
+                  <Icon className="size-5" aria-hidden="true" />
                 </div>
-                <h3 className="font-display text-lg font-bold text-brand-navy">
-                  {title}
-                </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  {text}
-                </p>
+                <div className="flex flex-col gap-1.5">
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-blue">
+                      0{i + 1}
+                    </span>
+                    <h3 className="font-display text-lg font-bold text-brand-navy">
+                      {title}
+                    </h3>
+                  </div>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {text}
+                  </p>
+                </div>
               </div>
             );
 

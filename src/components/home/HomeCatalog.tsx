@@ -86,8 +86,11 @@ export function HomeCatalog() {
     setPrice([PRICE_MIN, PRICE_MAX]);
   };
 
+  // Hairlines are drawn on the cards (bottom/right) plus a top/left frame on the
+  // container, so an incomplete last row leaves no empty cells bleeding the
+  // gray border colour through.
   const gridClass = cn(
-    "grid gap-px border border-border bg-border",
+    "grid border-l border-t border-border bg-white [&>*]:border-b [&>*]:border-r [&>*]:border-border",
     view === "expanded"
       ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
       : "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"

@@ -89,41 +89,42 @@ function LinkRow({ label, href, description }: SitemapLink) {
 export default function SitemapPage() {
   return (
     <main className="flex-1 bg-brand-light">
-      <section className="border-b border-border bg-white">
-        <div className="mx-auto w-full max-w-[1320px] px-6 lg:px-10">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border py-4 font-mono text-[11px] uppercase tracking-[0.22em]">
-            <span className="flex items-center gap-2.5 text-brand-blue">
-              <span aria-hidden="true" className="size-1.5 bg-brand-navy" />
-              Navigation
-            </span>
-            <span className="hidden text-brand-navy/45 sm:inline">
-              Wick Peptides / Site Index
-            </span>
-          </div>
-
-          <div className="grid items-end gap-x-10 gap-y-6 py-16 lg:grid-cols-12 lg:py-24">
-            <h1 className="font-display text-4xl font-bold leading-[1.05] tracking-tight text-brand-navy sm:text-5xl lg:col-span-7">
-              Sitemap
-            </h1>
-            <p className="self-end leading-relaxed text-muted-foreground lg:col-span-5">
-              A full directory of every page across the Wick Peptides website.
-            </p>
-          </div>
+      {/* Centered intro on a navy band */}
+      <section className="bg-brand-navy">
+        <div className="mx-auto flex w-full max-w-[1320px] flex-col items-center px-6 py-20 text-center lg:px-10 lg:py-28">
+          <SectionLabel className="text-white/70 [&>span:first-child]:bg-white/70">
+            Site Index
+          </SectionLabel>
+          <h1 className="mt-6 font-display text-5xl font-bold leading-[1.02] tracking-tight text-white sm:text-6xl lg:text-7xl">
+            Sitemap
+          </h1>
+          <p className="mt-5 max-w-xl leading-relaxed text-white/70">
+            A full directory of every page across the Wick Peptides website.
+          </p>
         </div>
       </section>
 
       <section>
         <div className="mx-auto w-full max-w-[1320px] px-6 py-16 lg:px-10 lg:py-20">
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-16">
             {SITEMAP.map(({ title, links }, i) => (
               <div
                 key={title}
-                className="border-t border-border pt-8 [&:not(:first-child)]:mt-12"
+                className="grid gap-x-10 gap-y-6 lg:grid-cols-12"
               >
-                <SectionLabel index={String(i + 1).padStart(2, "0")}>
-                  {title}
-                </SectionLabel>
-                <ul className="mt-5 border border-border bg-white">
+                {/* Oversized index numeral rail */}
+                <div className="flex items-baseline gap-4 lg:col-span-3 lg:flex-col lg:gap-4">
+                  <span
+                    aria-hidden="true"
+                    className="font-display text-6xl font-extrabold leading-none tracking-tight tabular-nums text-brand-navy/12 lg:text-7xl"
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <SectionLabel>{title}</SectionLabel>
+                </div>
+
+                {/* Link ledger */}
+                <ul className="border border-border bg-white lg:col-span-9">
                   {links.map((link) => (
                     <LinkRow key={link.href} {...link} />
                   ))}

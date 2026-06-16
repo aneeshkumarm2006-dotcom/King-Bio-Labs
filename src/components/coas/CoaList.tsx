@@ -21,17 +21,24 @@ export function CoaList() {
 
   return (
     <div>
-      {/* Header + search */}
-      <div className="flex flex-wrap items-end justify-between gap-4 border-t border-border pt-6">
-        <h2 className="font-display text-2xl font-bold tracking-tight text-brand-navy sm:text-3xl">
+      {/* Oversized heading band with live count */}
+      <div className="flex flex-wrap items-baseline gap-x-5 gap-y-2">
+        <h2 className="font-display text-4xl font-extrabold tracking-tight text-brand-navy sm:text-5xl">
           Available COAs
         </h2>
+        <span className="font-mono text-[12px] uppercase tracking-[0.18em] text-brand-navy/45 tabular-nums">
+          {String(filtered.length).padStart(2, "0")} on record
+        </span>
+      </div>
+
+      {/* Full-width search band */}
+      <div className="mt-8 border-y border-border py-4">
         <input
           type="search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Look up a product or batch…"
-          className="flex h-11 w-full max-w-xs rounded-none border border-brand-border bg-white px-4 font-mono text-[13px] uppercase tracking-[0.08em] transition-colors placeholder:normal-case placeholder:tracking-normal placeholder:text-muted-foreground focus-visible:border-brand-navy focus-visible:outline-none"
+          className="flex h-11 w-full rounded-none border-0 bg-transparent px-0 font-mono text-[13px] uppercase tracking-[0.08em] transition-colors placeholder:normal-case placeholder:tracking-normal placeholder:text-muted-foreground focus-visible:outline-none"
         />
       </div>
 

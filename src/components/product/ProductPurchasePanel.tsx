@@ -44,51 +44,56 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
   const points = Math.round(total);
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col">
       {/* Breadcrumb */}
       <nav
         aria-label="Breadcrumb"
-        className="flex flex-wrap items-center gap-1.5 text-xs font-medium text-muted-foreground"
+        className="flex flex-wrap items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
       >
         <Link href="/" className="hover:text-brand-blue">
           Home
         </Link>
-        <ChevronRight className="size-3.5" aria-hidden="true" />
+        <ChevronRight className="size-3 text-brand-navy/40" aria-hidden="true" />
         <Link href="/shop" className="hover:text-brand-blue">
           Shop
         </Link>
-        <ChevronRight className="size-3.5" aria-hidden="true" />
+        <ChevronRight className="size-3 text-brand-navy/40" aria-hidden="true" />
         <span className="text-brand-navy">{product.category}</span>
       </nav>
 
       {/* Title */}
-      <h1 className="text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">
+      <h1 className="mt-5 font-display text-3xl font-bold leading-[1.05] tracking-tight text-brand-navy sm:text-4xl">
         {product.name}
       </h1>
 
       {/* Rating + reviews anchor */}
-      <div className="flex items-center gap-3">
-        <StarRating rating={product.rating} showValue size={18} />
+      <div className="mt-4 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+        <StarRating rating={product.rating} showValue size={16} />
+        <span aria-hidden="true" className="h-3 w-px bg-border" />
         <a
           href="#reviews"
-          className="text-sm text-muted-foreground underline-offset-2 hover:text-brand-blue hover:underline"
+          className="text-brand-navy underline-offset-4 transition-colors hover:text-brand-blue hover:underline"
         >
           {product.reviewCount} reviews
         </a>
       </div>
 
       {/* Price */}
-      <div>
-        <p className="text-4xl font-bold text-brand-navy">${total.toFixed(2)}</p>
-        <p className="mt-1 text-sm text-muted-foreground">
+      <div className="mt-6 flex items-end justify-between gap-4 border-t border-border pt-6">
+        <p className="font-display text-5xl font-bold tabular-nums text-brand-navy">
+          ${total.toFixed(2)}
+        </p>
+        <p className="pb-1 text-right font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
           Collect {points} points on this order
         </p>
       </div>
 
       {/* Dosage selector — only when the product has variants */}
       {dosageItems.length > 0 && (
-        <div className="flex flex-col gap-1.5">
-          <label className="text-sm font-medium text-brand-navy">Dosage</label>
+        <div className="mt-6 flex flex-col gap-2">
+          <label className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-navy">
+            Dosage
+          </label>
           <Select
             items={dosageItems}
             value={selectedDosage}
@@ -96,7 +101,7 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
               if (typeof value === "string") setSelectedDosage(value);
             }}
           >
-            <SelectTrigger className="w-full justify-between border-brand-border text-brand-navy data-[size=default]:h-11">
+            <SelectTrigger className="w-full justify-between rounded-none border-brand-border text-brand-navy data-[size=default]:h-11">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -111,9 +116,11 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
       )}
 
       {/* Bundle quantity pills */}
-      <div className="flex flex-col gap-1.5">
-        <span className="text-sm font-medium text-brand-navy">Quantity</span>
-        <div className="flex flex-wrap gap-2">
+      <div className="mt-6 flex flex-col gap-2">
+        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-navy">
+          Quantity
+        </span>
+        <div className="flex flex-wrap gap-px border border-border bg-border">
           {BUNDLE_OPTIONS.map((n) => (
             <button
               key={n}
@@ -121,10 +128,10 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
               onClick={() => setQuantity(n)}
               aria-pressed={quantity === n}
               className={cn(
-                "rounded-lg border px-3.5 py-2 text-sm font-medium transition-colors",
+                "flex-1 rounded-none px-3.5 py-2.5 text-sm font-medium transition-colors",
                 quantity === n
-                  ? "border-brand-navy bg-brand-navy text-white"
-                  : "border-brand-border text-brand-navy hover:border-brand-blue"
+                  ? "bg-brand-navy text-white"
+                  : "bg-white text-brand-navy hover:text-brand-blue"
               )}
             >
               {n} {n === 1 ? "Vial" : "Vials"}
@@ -134,17 +141,17 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
       </div>
 
       {/* Quantity stepper */}
-      <div className="inline-flex w-fit items-center rounded-lg border border-brand-border">
+      <div className="mt-4 inline-flex w-fit items-center border border-brand-border">
         <button
           type="button"
           onClick={() => setQuantity((q) => Math.max(1, q - 1))}
           disabled={quantity <= 1}
           aria-label="Decrease quantity"
-          className="flex size-10 items-center justify-center text-brand-navy transition-colors hover:bg-brand-light disabled:cursor-not-allowed disabled:opacity-40"
+          className="flex size-11 items-center justify-center rounded-none border-r border-brand-border text-brand-navy transition-colors hover:bg-surface-2 disabled:cursor-not-allowed disabled:opacity-40"
         >
           <Minus className="size-4" />
         </button>
-        <span className="w-12 text-center text-sm font-semibold text-brand-navy tabular-nums">
+        <span className="w-14 text-center font-mono text-sm font-semibold tabular-nums text-brand-navy">
           {quantity}
         </span>
         <button
@@ -152,7 +159,7 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
           onClick={() => setQuantity((q) => Math.min(MAX_QUANTITY, q + 1))}
           disabled={quantity >= MAX_QUANTITY}
           aria-label="Increase quantity"
-          className="flex size-10 items-center justify-center text-brand-navy transition-colors hover:bg-brand-light disabled:cursor-not-allowed disabled:opacity-40"
+          className="flex size-11 items-center justify-center rounded-none border-l border-brand-border text-brand-navy transition-colors hover:bg-surface-2 disabled:cursor-not-allowed disabled:opacity-40"
         >
           <Plus className="size-4" />
         </button>
@@ -173,7 +180,7 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
           setAdded(true);
         }}
         className={cn(
-          "flex h-12 w-full items-center justify-center gap-2 rounded-xl px-5 text-sm font-semibold text-white transition-colors",
+          "mt-6 flex h-12 w-full items-center justify-center gap-2 rounded-none px-7 text-[13px] font-semibold uppercase tracking-[0.12em] text-white transition-colors",
           added ? "bg-emerald-600" : "bg-brand-navy hover:bg-brand-blue"
         )}
       >
@@ -194,26 +201,31 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
       {/* Download COA */}
       <Link
         href="/coas"
-        className="inline-flex w-fit items-center gap-2 text-sm font-medium text-brand-blue underline-offset-4 hover:underline"
+        className="mt-4 inline-flex w-fit items-center gap-2 font-mono text-[12px] uppercase tracking-[0.18em] text-brand-navy transition-colors hover:text-brand-blue"
       >
         <Download className="size-4" />
         Download COA
       </Link>
 
       {/* Description */}
-      <p className="text-sm leading-relaxed text-muted-foreground">
+      <p className="mt-6 border-t border-border pt-6 text-sm leading-relaxed text-muted-foreground">
         {getProductDescription(product)}
       </p>
 
       {/* Same-day shipping countdown */}
-      <CountdownTimer />
+      <CountdownTimer className="mt-6" />
 
       {/* Research Use Only disclaimer */}
-      <div className="rounded-xl border border-brand-border bg-white p-4 text-sm leading-relaxed text-muted-foreground">
-        <span className="font-bold text-brand-navy">Research Use Only.</span>{" "}
-        This product is intended strictly for in-vitro laboratory research and
-        is not for human or animal consumption, diagnostic, or therapeutic use.
-        By purchasing, you confirm you are a qualified researcher.
+      <div className="mt-4 flex items-stretch border border-border bg-white">
+        <span aria-hidden="true" className="w-1 shrink-0 bg-brand-navy" />
+        <p className="p-4 text-sm leading-relaxed text-muted-foreground">
+          <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-navy">
+            Research Use Only.
+          </span>{" "}
+          This product is intended strictly for in-vitro laboratory research and
+          is not for human or animal consumption, diagnostic, or therapeutic use.
+          By purchasing, you confirm you are a qualified researcher.
+        </p>
       </div>
     </div>
   );

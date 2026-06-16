@@ -45,14 +45,19 @@ export function CountdownTimer({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex items-center gap-2 rounded-xl border border-brand-border bg-brand-light px-4 py-3 text-sm text-brand-navy",
+        "flex items-stretch border border-border bg-surface",
         className
       )}
     >
-      <Clock className="size-4 shrink-0 text-brand-blue" aria-hidden="true" />
-      <span>
+      <span className="flex items-center gap-2 border-r border-border bg-white px-3 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+        <Clock className="size-4 shrink-0 text-brand-blue" aria-hidden="true" />
+        Ship Cutoff
+      </span>
+      <span className="flex flex-1 flex-wrap items-center justify-between gap-x-3 gap-y-1 px-4 py-3 text-sm text-brand-navy">
         Place your order within{" "}
-        <span className="font-mono font-semibold tabular-nums">{display}</span>{" "}
+        <span className="font-mono text-lg font-semibold tabular-nums text-brand-navy">
+          {display}
+        </span>{" "}
         to ship today
       </span>
     </div>

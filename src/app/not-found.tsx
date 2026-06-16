@@ -1,43 +1,44 @@
 import Link from "next/link";
-import { ArrowLeft, Search, ShieldCheck } from "lucide-react";
+import { ArrowLeft, Search } from "lucide-react";
 
 import { SectionLabel } from "@/components/SectionLabel";
 
 export default function NotFound() {
   return (
-    <main className="flex min-h-[80vh] flex-1 items-center justify-center bg-brand-light px-6 py-20">
-      <div className="flex max-w-xl flex-col items-center text-center">
-        <span className="flex size-16 items-center justify-center rounded-full border-2 border-brand-navy/15 bg-white text-brand-navy">
-          <ShieldCheck className="size-7" />
-        </span>
+    <main className="flex min-h-[80vh] flex-1 items-center bg-brand-light px-6 py-20">
+      <div className="mx-auto w-full max-w-[1320px] px-0 lg:px-10">
+        <div className="grid items-end gap-x-10 gap-y-10 border-t border-border pt-10 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <SectionLabel>Error 404</SectionLabel>
+            <h1 className="mt-6 font-display text-5xl font-bold leading-[1.02] tracking-tight text-brand-navy sm:text-6xl lg:text-7xl">
+              Page not found
+            </h1>
+          </div>
 
-        <SectionLabel className="mt-8">Error 404</SectionLabel>
+          <div className="flex flex-col gap-8 lg:col-span-5 lg:pb-2">
+            <p className="text-base leading-relaxed text-muted-foreground">
+              The page you&rsquo;re after either doesn&rsquo;t exist or has been
+              relocated. Our full catalog of compounds is still right here —
+              let&rsquo;s point you back to it.
+            </p>
 
-        <h1 className="mt-4 text-5xl font-bold tracking-tight text-brand-navy sm:text-6xl">
-          Page not found
-        </h1>
-
-        <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-          The page you&rsquo;re after either doesn&rsquo;t exist or has been
-          relocated. Our full catalog of compounds is still right here — let&rsquo;s
-          point you back to it.
-        </p>
-
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Link
-            href="/"
-            className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-brand-navy px-6 text-sm font-medium text-white transition-colors hover:bg-brand-blue"
-          >
-            <ArrowLeft className="size-4" />
-            Return home
-          </Link>
-          <Link
-            href="/shop"
-            className="inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-brand-border bg-white px-6 text-sm font-medium text-brand-navy transition-colors hover:bg-brand-light"
-          >
-            <Search className="size-4" />
-            Explore the catalog
-          </Link>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-none bg-brand-navy px-7 text-[13px] font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-brand-blue"
+              >
+                <ArrowLeft className="size-4" />
+                Return home
+              </Link>
+              <Link
+                href="/shop"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-none border border-brand-navy bg-transparent px-7 text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-navy transition-colors hover:bg-brand-navy hover:text-white"
+              >
+                <Search className="size-4" />
+                Explore the catalog
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </main>

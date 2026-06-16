@@ -35,32 +35,39 @@ export function AuthForms() {
     setSubmitted(false);
   }
 
+  const tabs: Tab[] = ["login", "register"];
+
   return (
-    <div className="w-full rounded-2xl border border-brand-border bg-white p-6 sm:p-8">
+    <div className="w-full border border-brand-border bg-white">
       {/* Tab bar */}
-      <div className="mb-6 flex rounded-xl border border-brand-border p-1">
-        {(["login", "register"] as Tab[]).map((t) => (
+      <div className="grid grid-cols-2 border-b border-brand-border">
+        {tabs.map((t, i) => (
           <button
             key={t}
             type="button"
             onClick={() => switchTab(t)}
             className={cn(
-              "flex-1 rounded-lg py-2 text-sm font-semibold capitalize transition-colors",
+              "flex items-center justify-center gap-2 py-3.5 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors",
+              i === 0 && "border-r border-brand-border",
               tab === t
                 ? "bg-brand-navy text-white"
                 : "text-muted-foreground hover:text-brand-navy"
             )}
           >
+            <span className="text-current/50">§0{i + 1}</span>
             {t === "login" ? "Sign In" : "Register"}
           </button>
         ))}
       </div>
 
       {/* Form */}
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-5 p-6 sm:p-8">
         {tab === "register" && (
-          <div className="flex flex-col gap-1.5">
-            <Label htmlFor="auth-name" className="text-brand-navy">
+          <div className="flex flex-col gap-2">
+            <Label
+              htmlFor="auth-name"
+              className="font-mono text-[10px] uppercase tracking-[0.2em] text-brand-navy"
+            >
               Full Name
             </Label>
             <Input
@@ -69,13 +76,16 @@ export function AuthForms() {
               onChange={(e) => setName(e.target.value)}
               placeholder="Dr. Jane Smith"
               required
-              className="h-11 border-brand-border text-brand-navy"
+              className="h-11 rounded-none border-brand-border text-brand-navy"
             />
           </div>
         )}
 
-        <div className="flex flex-col gap-1.5">
-          <Label htmlFor="auth-email" className="text-brand-navy">
+        <div className="flex flex-col gap-2">
+          <Label
+            htmlFor="auth-email"
+            className="font-mono text-[10px] uppercase tracking-[0.2em] text-brand-navy"
+          >
             Email
           </Label>
           <Input
@@ -85,12 +95,15 @@ export function AuthForms() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@institution.edu"
             required
-            className="h-11 border-brand-border text-brand-navy"
+            className="h-11 rounded-none border-brand-border text-brand-navy"
           />
         </div>
 
-        <div className="flex flex-col gap-1.5">
-          <Label htmlFor="auth-password" className="text-brand-navy">
+        <div className="flex flex-col gap-2">
+          <Label
+            htmlFor="auth-password"
+            className="font-mono text-[10px] uppercase tracking-[0.2em] text-brand-navy"
+          >
             Password
           </Label>
           <div className="relative">
@@ -102,7 +115,7 @@ export function AuthForms() {
               placeholder="••••••••"
               required
               minLength={8}
-              className="h-11 border-brand-border pr-10 text-brand-navy"
+              className="h-11 rounded-none border-brand-border pr-10 text-brand-navy"
             />
             <button
               type="button"
@@ -120,8 +133,11 @@ export function AuthForms() {
         </div>
 
         {tab === "register" && (
-          <div className="flex flex-col gap-1.5">
-            <Label htmlFor="auth-confirm" className="text-brand-navy">
+          <div className="flex flex-col gap-2">
+            <Label
+              htmlFor="auth-confirm"
+              className="font-mono text-[10px] uppercase tracking-[0.2em] text-brand-navy"
+            >
               Confirm Password
             </Label>
             <Input
@@ -132,7 +148,7 @@ export function AuthForms() {
               placeholder="••••••••"
               required
               minLength={8}
-              className="h-11 border-brand-border text-brand-navy"
+              className="h-11 rounded-none border-brand-border text-brand-navy"
             />
           </div>
         )}
@@ -141,7 +157,7 @@ export function AuthForms() {
           <div className="flex justify-end">
             <Link
               href="#"
-              className="text-xs text-brand-blue underline-offset-4 hover:underline"
+              className="font-mono text-[10px] uppercase tracking-[0.16em] text-brand-blue underline-offset-4 hover:underline"
             >
               Forgot password?
             </Link>
@@ -151,7 +167,7 @@ export function AuthForms() {
         <button
           type="submit"
           className={cn(
-            "mt-1 flex h-12 w-full items-center justify-center gap-2 rounded-xl text-sm font-semibold text-white transition-colors",
+            "mt-1 inline-flex h-12 w-full items-center justify-center gap-2 rounded-none text-[13px] font-semibold uppercase tracking-[0.12em] text-white transition-colors",
             submitted
               ? "bg-emerald-600"
               : "bg-brand-navy hover:bg-brand-blue"
@@ -172,7 +188,7 @@ export function AuthForms() {
       </form>
 
       {tab === "register" && (
-        <p className="mt-4 text-center text-xs text-muted-foreground">
+        <p className="border-t border-brand-border px-6 py-5 text-center text-xs leading-relaxed text-muted-foreground sm:px-8">
           Creating an account means you accept our{" "}
           <Link
             href="/legal/terms"

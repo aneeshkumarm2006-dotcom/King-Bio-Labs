@@ -33,7 +33,7 @@ export const PRODUCTS: Product[] = [
   // Category 1 — GLP & Metabolic Peptides
   {
     slug: "semaglutide-10mg",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "Semaglutide 10MG",
     category: "GLP & Metabolic Peptides",
     categorySlug: "glp-metabolic",
@@ -44,7 +44,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "tirzepatide-10mg",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "Tirzepatide 10MG",
     category: "GLP & Metabolic Peptides",
     categorySlug: "glp-metabolic",
@@ -55,7 +55,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "retatrutide-10mg",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "Retatrutide 10MG",
     category: "GLP & Metabolic Peptides",
     categorySlug: "glp-metabolic",
@@ -67,7 +67,7 @@ export const PRODUCTS: Product[] = [
   // Category 2 — Growth Hormone & IGF Peptides
   {
     slug: "tesamorelin-20mg",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "Tesamorelin 20MG",
     category: "Growth Hormone & IGF Peptides",
     categorySlug: "growth-hormone-igf",
@@ -78,7 +78,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "cjc1295-ipamorelin-blend",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "CJC-1295 No DAC + Ipamorelin 10MG Blend",
     category: "Growth Hormone & IGF Peptides",
     categorySlug: "growth-hormone-igf",
@@ -89,7 +89,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "cjc1295-no-dac-10mg",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "CJC-1295 No DAC 10MG",
     category: "Growth Hormone & IGF Peptides",
     categorySlug: "growth-hormone-igf",
@@ -99,7 +99,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "ipamorelin-5mg",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "Ipamorelin 5MG",
     category: "Growth Hormone & IGF Peptides",
     categorySlug: "growth-hormone-igf",
@@ -109,7 +109,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "sermorelin-acetate-9mg",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "Sermorelin Acetate 9MG",
     category: "Growth Hormone & IGF Peptides",
     categorySlug: "growth-hormone-igf",
@@ -119,7 +119,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "igf-1-lr3",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "IGF-1 LR3",
     category: "Growth Hormone & IGF Peptides",
     categorySlug: "growth-hormone-igf",
@@ -136,7 +136,7 @@ export const PRODUCTS: Product[] = [
   // Category 3 — Recovery & Tissue Research
   {
     slug: "bpc-157",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "BPC-157",
     category: "Recovery & Tissue Research",
     categorySlug: "recovery-tissue",
@@ -152,7 +152,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "bpc157-tb500-blend",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "BPC-157 + TB-500 Blend 15MG",
     category: "Recovery & Tissue Research",
     categorySlug: "recovery-tissue",
@@ -163,7 +163,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "tb-500-5mg",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "Thymosin Beta-4 (TB-500) 5MG",
     category: "Recovery & Tissue Research",
     categorySlug: "recovery-tissue",
@@ -173,7 +173,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "aod-9604-5mg",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "AOD-9604 5MG",
     category: "Recovery & Tissue Research",
     categorySlug: "recovery-tissue",
@@ -183,7 +183,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "ss-31",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "SS-31",
     category: "Recovery & Tissue Research",
     categorySlug: "recovery-tissue",
@@ -198,7 +198,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "ghk-cu",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "GHK-Cu",
     category: "Recovery & Tissue Research",
     categorySlug: "recovery-tissue",
@@ -215,7 +215,7 @@ export const PRODUCTS: Product[] = [
   // Category 4 — Longevity & Cellular Research
   {
     slug: "foxo4-dri-10mg",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "FOXO4-DRI 10MG",
     category: "Longevity & Cellular Research",
     categorySlug: "longevity-cellular",
@@ -225,7 +225,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "glutathione",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "Glutathione",
     category: "Longevity & Cellular Research",
     categorySlug: "longevity-cellular",
@@ -242,7 +242,7 @@ export const PRODUCTS: Product[] = [
   // Category 5 — Skin, Pigmentation & Anti-Aging
   {
     slug: "melanotan-2-10mg",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "Melanotan 2 10MG",
     category: "Skin, Pigmentation & Anti-Aging",
     categorySlug: "skin-pigmentation",
@@ -253,7 +253,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "melanotan-1-10mg",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "Melanotan 1 10MG",
     category: "Skin, Pigmentation & Anti-Aging",
     categorySlug: "skin-pigmentation",
@@ -263,7 +263,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "pt-141-10mg",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "PT-141 (Bremelanotide) 10MG",
     category: "Skin, Pigmentation & Anti-Aging",
     categorySlug: "skin-pigmentation",
@@ -274,7 +274,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "glow-70-blend",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "GLOW 70 Blend",
     category: "Skin, Pigmentation & Anti-Aging",
     categorySlug: "skin-pigmentation",
@@ -285,7 +285,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "kisspeptin-10",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "KissPeptin-10 10MG",
     category: "Skin, Pigmentation & Anti-Aging",
     categorySlug: "skin-pigmentation",
@@ -297,7 +297,7 @@ export const PRODUCTS: Product[] = [
   // Category 6 — Cognitive, Neuropeptide & Sleep Research
   {
     slug: "semax-10mg",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "Semax 10MG",
     category: "Cognitive, Neuropeptide & Sleep Research",
     categorySlug: "cognitive-neuropeptide",
@@ -308,7 +308,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "selank-10mg",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "Selank 10MG",
     category: "Cognitive, Neuropeptide & Sleep Research",
     categorySlug: "cognitive-neuropeptide",
@@ -321,7 +321,7 @@ export const PRODUCTS: Product[] = [
   // Category 7 — Research Compounds & Blends
   {
     slug: "hcg-10000iu",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "HCG 10000 IU",
     category: "Research Compounds & Blends",
     categorySlug: "research-compounds",
@@ -331,7 +331,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "vitamin-b12-10ml",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "Vitamin B12 10ML",
     category: "Research Compounds & Blends",
     categorySlug: "research-compounds",
@@ -341,7 +341,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "reconstitution-water",
-    image: "/products/wick-vial.png",
+    image: "/products/magic.png",
     name: "Reconstitution Water",
     category: "Research Compounds & Blends",
     categorySlug: "research-compounds",
